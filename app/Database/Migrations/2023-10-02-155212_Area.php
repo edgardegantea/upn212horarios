@@ -5,7 +5,7 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSQL;
 
-class Area extends Migration
+class EstatusDelPersonal extends Migration
 {
     public function up()
     {
@@ -19,11 +19,11 @@ class Area extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('areas', true);
+        $this->forge->createTable('estatus_del_personal', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('areas', true);
+        $this->forge->dropTable('estatus_del_personal', true);
     }
 }

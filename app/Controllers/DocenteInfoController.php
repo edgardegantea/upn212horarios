@@ -3,14 +3,37 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\DocenteInfoModel;
+use App\Models\DocenteModel;
 
 class DocenteInfoController extends BaseController
 {
+
+    protected $docenteInfoModel;
+    protected $docenteModel;
+
+    public function __construct()
+    {
+     $this->docenteInfoModel = new DocenteInfoModel();
+     $this->docenteModel = new DocenteModel();
+    }
+
+
+
     public function index()
     {
-        $db = \Config\Database::connect();
-        $docenteInfo = $db->query('select * from docenteinfo')->getResultArray();
+        $data['docenteInfo'] = $this->docenteInfoModel->findAll();
 
-        dd($docenteInfo);
+        return view('docenteinfo/index', $data);
+    }
+
+
+    public function create()
+    {
+        $data = [
+            'docente'   => $this->docenteModel->findAll(),
+        ];
+
+        return view('docenteinfo/create', $data);
     }
 }

@@ -9,6 +9,7 @@ class DocentesAsignaturas extends Migration
 {
     public function up()
     {
+        /*
         $this->db->disableForeignKeyChecks();
 
         $this->forge->addField([
@@ -27,10 +28,11 @@ class DocentesAsignaturas extends Migration
         $this->forge->createTable('docentes_asignaturas', true);
 
         $this->db->enableForeignKeyChecks();
+        */
     }
 
     public function down()
     {
-        $this->forge->dropTable('docentes_asignaturas', true);
+        // $this->forge->dropTable('docentes_asignaturas', true);
     }
 }
