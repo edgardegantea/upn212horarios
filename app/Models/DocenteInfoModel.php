@@ -13,7 +13,7 @@ class DocenteInfoModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['codigo', 'nombre', 'aPaterno', 'aMaterno', 'foto', 'genero'];
+    protected $allowedFields    = ['id', 'calle', 'numInterior', 'municipio', 'estado'];
 
     // Dates
     protected $useTimestamps = true;
@@ -43,10 +43,14 @@ class DocenteInfoModel extends Model
 
     public function getDocenteInfo()
     {
-        return $this->findAll();
+        return $this->join('usuarios', 'usuarios.id = docenteinfo.id')->findAll();
     }
 
 
+    public function getDocenteInfoWithUsuario()
+    {
+        return $this->join('usuarios', 'usuarios.id = docenteinfo.id')->findAll();
+    }
     
 
 }

@@ -1,12 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
-</head>
-<body>
+<?= $this->extend('template/body') ?>
 
-    <div class="container">
+<?= $this->section('content') ?>
+
+
+
         <h2 class="mt-5">Crear Usuario</h2>
+
+
+        <div>
+            <?= \Config\Services::validation()->listErrors(); ?>
+        </div>
 
 
         <form class="mb-5" action="<?= base_url('admin/usuarios'); ?>" method="post">
@@ -38,10 +41,10 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="rol">Tipo de usuario:</label>
-                        <select class="form-select" id="rol" name="rol" required>
+                        <select class="form-control" id="rol" name="rol" required>
                             <option value="admin">Administrador</option>
                             <option value="coordinador">Coordinador</option>
-                            <!-- <option value="docente">Docente</option> -->
+                            <option value="docente">Docente</option>
                             <option value="alumno">Alumno</option>
                         </select>
                     </div>
@@ -96,5 +99,7 @@
             
         </form>
     </div>
-</body>
-</html>
+
+    
+
+<?= $this->endSection(); ?>

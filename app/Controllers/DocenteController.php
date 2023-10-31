@@ -27,18 +27,18 @@ class DocenteController extends BaseController
 
             if (!$this->validate($rules, $errors)) {
 
-                return view('/docentes/login', [
+                return view('docentes/login', [
                     "validation" => $this->validator,
                 ]);
 
             } else {
                 $model = new DocenteModel();
 
-                $docente = $model->where('username', $this->request->getVar('username'))->first();
+                $user = $model->where('username', $this->request->getVar('username'))->first();
 
-                $this->setDocenteSession($docente);
+                $this->setUserSession($user);
 
-                if($docente['rol'] == "docente") {
+                if($user['rol'] == "docente") {
                     return redirect()->to(base_url('docente'));
                 }
             }
@@ -48,13 +48,15 @@ class DocenteController extends BaseController
 
 
 
-    private function setDocenteSession($docente)
+    private function setUserSession($user)
     {
         $data = [
-            'id'            => $docente['id'],
-            'rol'           => $docente['rol'],
-            'username'      => $docente['username'],
-            'isLoggedIn'    => true
+            'id'            => $user['id'],
+            'rol'           => $user['rol'],
+            'username'      => $user['username'],
+            'isLoggedIn'    => true,
+            'horas_asignadas'   => $user['horas_asignadas'],
+            'estatus'           => $user['estatus']
         ];
 
         session()->set($data);
@@ -64,7 +66,7 @@ class DocenteController extends BaseController
     public function logoutd()
     {
         session()->destroy();
-        return redirect()->to('login');
+        return redirect()->to('logind');
     }
 
 

@@ -1,11 +1,12 @@
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+<?= $this->extend('template/body') ?>
+
+<?= $this->section('content') ?>
 
 
-<div class="container mt-5">
     
-    <h2>Usuarios del sistema</h2>
+    <h2>Usuarios registrados en el sistema</h2>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-        <a class="btn btn-primary me-md-2" href="<?= site_url('admin/'); ?>">Regresar</a>
+        <a class="btn btn-primary me-md-2 mr-1" href="<?= site_url('admin/'); ?>">Regresar</a>
         <a class="btn btn-primary" href="<?= site_url('admin/usuarios/new'); ?>">Nuevo</a>    
     </div>
 
@@ -44,13 +45,14 @@
                         <?php endif; ?>
                     </td>
                     <td>
-                        
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="<?= base_url('admin/usuarios/'.$usuario['id'].'/edit'); ?>" class="btn btn-sm btn-light me-md-2 mr-1"><i class="fas fa-edit"></i></a>
                         <form class="display-none" method="post" action="<?= base_url('admin/usuarios/'.$usuario['id']); ?>" id="usuarioDeleteForm<?=$usuario['id']?>">
                             <input type="hidden" name="_method" value="DELETE"/>
-                            <a href="javascript:void(0)" onclick="deleteUsuario('usuarioDeleteForm<?=$usuario['id']; ?>')" class="btn btn-sm btn-danger" title="Eliminar registro">Eliminar</a>
+                            <a href="javascript:void(0)" onclick="deleteUsuario('usuarioDeleteForm<?=$usuario['id']; ?>')" class="btn btn-sm btn-danger" title="Eliminar registro"><i class="fas fa-trash"></i></a>
                         </form>
-
-                        <!-- <span class="fas fa-trash"></span> -->
+                        </div>
+                        
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -58,8 +60,6 @@
         </tbody>
     </table>
 
-
-</div>
 
 
 
@@ -71,3 +71,6 @@
         }
     }
 </script>
+
+
+<?= $this->endSection(); ?>

@@ -16,11 +16,8 @@ class UsuarioController extends ResourceController
         $this->usuario = new UsuarioModel();
     }
 
-    /**
-     * Return an array of resource objects, themselves in array format
-     *
-     * @return mixed
-     */
+    
+
     public function index()
     {
         $usuarios = $this->usuario->orderBy('id', 'desc')->findAll(50);
@@ -32,11 +29,9 @@ class UsuarioController extends ResourceController
         return view('admin/usuarios/index', $data);
     }
 
-    /**
-     * Return the properties of a resource object
-     *
-     * @return mixed
-     */
+
+    
+
     public function show($id = null)
     {
         //
@@ -89,34 +84,58 @@ class UsuarioController extends ResourceController
 
 
 
-    /**
-     * Return the editable properties of a resource object
-     *
-     * @return mixed
-     */
     public function edit($id = null)
     {
-        //
+        $usuario = new UsuarioModel();
+        $data['usuario'] = $usuario->find($id);
+
+        return view('admin/usuarios/edit', $data);
     }
 
-    /**
-     * Add or update a model resource, from "posted" properties
-     *
-     * @return mixed
-     */
+
+
     public function update($id = null)
     {
-        //
+        $usuario = new UsuarioModel();
+        $data = [
+            'rol' => $this->request->getVar('rol'),
+            'nombre' => $this->request->getVar('nombre'),
+            'apaterno' => $this->request->getVar('apaterno'),
+            'amaterno' => $this->request->getVar('amaterno'),
+            'username' => $this->request->getVar('username'),
+            'email' => $this->request->getVar('email'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
+            'sexo' => $this->request->getVar('sexo'),
+            'fechaNacimiento' => $this->request->getVar('fechaNacimiento'),
+            'status' => $this->request->getVar('status')
+        ];
+
+        $usuario->update($id, $data);
+
+        return redirect()->to('/admin/usuarios');
     }
 
-    /**
-     * Delete the designated resource object from the model
-     *
-     * @return mixed
-     */
+
+
     public function delete($id = null)
     {
-        $this->usuario->delete($id);
-        return redirect()->to(base_url('/admin/usuarios'));
+        $usuario = new UsuarioModel();
+        $usuario->delete($id);
+
+        return redirect()->to('/admin/usuarios');
     }
+
+
+
+    public function usuariosDocentes()
+    {
+        $usuariosDocentes = $this->usuario->where('rol', 'docente')->orderBy('id', 'asc')->findAll();
+
+        $data = [
+            'usuariosDocentes'  => $usuariosDocentes
+        ];
+
+        return view('admin/docentes/index', $data);
+    }
+
 }

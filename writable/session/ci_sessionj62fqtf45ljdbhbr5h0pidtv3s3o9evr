@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1698708684;id|s:1:"2";nombre|s:5:"Pedro";apaterno|s:8:"Jiménez";amaterno|s:7:"Escobar";username|s:5:"pedro";email|s:14:"pedro@mail.com";isLoggedIn|b:1;rol|s:7:"docente";sexo|s:1:"m";_ci_previous_url|s:47:"http://localhost:8080/docente/expediente/create";

@@ -19,6 +19,6 @@ class DocenteController extends BaseController
 
     public function index()
     {
-        echo 'Index de DocenteController';
+        return view('docente/dashboard');
     }
 }

@@ -16,8 +16,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     margin: 0;
-    font-family: Montserrat;
     margin: 0;
     padding: 0;
     /* background-image: url(<?php echo base_url('assets/img/upnfoto1.jpg'); ?>); */
@@ -86,7 +86,18 @@ button {
             </div>
             <button type="submit">Iniciar sesión</button>
         </form>
+
+
+        <br>
+        <br>
+
+        <a href="<?php echo base_url('registro'); ?>">Registrarme</a>
+
+
     </div>
+
+
+    
 
 </body>
 

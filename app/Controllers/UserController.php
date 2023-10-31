@@ -49,6 +49,10 @@ class UserController extends BaseController
                 if($user['rol'] == "alumno") {
                     return redirect()->to(base_url('alumno'));
                 }
+
+                if($user['rol'] == "docente") {
+                    return redirect()->to(base_url('docente'));
+                }
             }
         }
         return view('login');

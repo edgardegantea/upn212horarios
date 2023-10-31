@@ -14,7 +14,7 @@ class UsuarioModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['rol', 'nombre', 'apaterno', 'amaterno', 'username', 'email', 'password', 'sexo', 'fechaNacimiento', 'status'];
+    protected $allowedFields    = ['rol', 'nombre', 'apaterno', 'amaterno', 'estatusDD', 'condicion', 'rfc', 'username', 'email', 'password', 'sexo', 'fechaNacimiento', 'status'];
 
     // Dates
     protected $useTimestamps = true;

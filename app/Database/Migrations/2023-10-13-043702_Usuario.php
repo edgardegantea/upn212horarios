@@ -12,10 +12,14 @@ class Usuario extends Migration
         $this->db->disableForeignKeyChecks();
         $this->forge->addField([
             'id'                => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'numExpendiente'    => ['type' => 'varchar', 'constraint' => 10],
             'rol'               => ['type' => 'varchar', 'constraint' => 20, 'default' => "estudiante"],
             'nombre'            => ['type' => 'varchar', 'constraint' => 100],
             'apaterno'          => ['type' => 'varchar', 'constraint' => 50],
             'amaterno'          => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
+            'estatusDD'         => ['type' => 'varchar', 'constraint' => 20, 'null' => true],       
+            'condicion'         => ['type' => 'varchar', 'constraint' => 20, 'null' => true],       // Para identificar el tipo de docente
+            'rfc'               => ['type' => 'varchar', 'constraint' => 13, 'null' => true],
             'username'          => ['type' => 'varchar', 'constraint' => 50, 'unique' => true],
             'email'             => ['type' => 'varchar', 'constraint' => 100, 'unique' => true],
             'password'          => ['type' => 'varchar', 'constraint' => 255],

@@ -8,12 +8,12 @@ class Docenterules
     public function validateDocente(string $str, string $fields, array $data) {
         $model = new DocenteModel();
         
-        $docente = $model->where('username', $data['username'])->first();
+        $user = $model->where('username', $data['username'])->first();
         
-        if (!$docente) {
+        if (!$user) {
             return false;
         }
 
-        return password_verify($data['password'], $docente['password']);
+        return password_verify($data['password'], $user['password']);
     }
 }
