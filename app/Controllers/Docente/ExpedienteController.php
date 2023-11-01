@@ -14,6 +14,7 @@ class ExpedienteController extends BaseController
     {
         $this->expedienteModel = new ExpedienteModel();
     }
+    
 
     public function index()
     {
@@ -24,6 +25,7 @@ class ExpedienteController extends BaseController
         ];
         return view('docente/expedientes/index', $data);
     }
+    
 
     public function create()
     {

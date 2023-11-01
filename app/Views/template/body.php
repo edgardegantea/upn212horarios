@@ -113,9 +113,7 @@
                     <li class="nav-item menu-open">
                         <a href="<?= site_url('admin/programacion'); ?>" class="nav-link active">
                         <i class="nav-icon fas fa-square-poll-horizontal"></i>
-                            <p>
-                                Programación
-                            </p>
+                            <p>Programación</p>
                         </a>
 
                     </li>
@@ -124,27 +122,28 @@
                     <li class="nav-item">
                         <a href="<?= site_url('admin/usuarios'); ?>" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Usuarios
-                            </p>
+                            <p>Usuarios</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="<?= site_url('admin/usuarios/ud'); ?>" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Docentes
-                            </p>
+                            <p>Docentes</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="<?= site_url('admin/asignaturas'); ?>" class="nav-link">
                             <i class="nav-icon fas fa-book"></i>
-                            <p>
-                                Asignaturas
-                            </p>
+                            <p>Asignaturas</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="<?= site_url('admin/carreras'); ?>" class="nav-link">
+                            <i class="nav-icon fas fa-shapes"></i>
+                            <p>Carreras</p>
                         </a>
                     </li>
                     

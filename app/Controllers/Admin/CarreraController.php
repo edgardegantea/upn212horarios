@@ -2,31 +2,50 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\BaseController;
+use CodeIgniter\RESTful\ResourceController;
 use App\Models\CarreraModel;
 
-class CarreraController extends BaseController
+class CarreraController extends ResourceController
 {
-
-    protected $carreraModel;
+    private $carreraModel;
 
     public function __construct()
     {
+        helper(['form', 'url', 'session']);
+        $this->session = \Config\Services::session();
         $this->carreraModel = new CarreraModel();
     }
 
+    
 
     public function index()
     {
-        // $db = \Config\Database::connect();
-        // $carreras = $db->query('select * from carreras')->getResultArray();
-        $carreras = $this->carreraModel->findAll();
+        $carreras = $this->carreraModel->orderBy('nombre', 'asc')->findAll();
+        $carreraModel = new CarreraModel();
 
         $data = [
-            'carreras' => $carreras
+            'carreras'  => $carreras,
+            'carreras'  => $carreraModel->orderBy('nombre', 'asc')->findAll()
         ];
 
         return view('admin/carreras/index', $data);
+    }
+
+
+    
+
+    public function show($id = null)
+    {
+        //
+    }
+
+
+
+
+
+    public function new()
+    { 
+        return view('admin/carreras/create');
     }
 
 
@@ -34,39 +53,61 @@ class CarreraController extends BaseController
 
     public function create()
     {
-        helper('form');
 
-        return view('admin/carreras/create');
-    }
+        $data = [
+            'nombre'        => $this->request->getVar('nombre'),
+            'descripcion'   => $this->request->getVar('descripcion'),
+        ];
 
+        $rules = [
+            'nombre'    => 'required|is_unique[carreras.nombre]',
+        ];
 
-
-    public function store()
-    {
-        $carreraModel = new CarreraModel();
-
-
-        if ($this->request->getMethod() === 'post' && $this->validate([
-            'nombre' => 'required|min_length[5]',
-            'descripcion' => 'required|min_length[5]'
-        ])) {
-            $carreraModel->save([
-                'nombre'           => $this->request->getPost('nombre'),
-                'descripcion'       => $this->request->getPost('descripcion')
-            ]);
-
-            return redirect()->to('/admin/carreras');
+        if ($this->validate($rules)) {
+            $this->carreraModel->insert($data);
+            return redirect()->to(site_url('/admin/carreras'));
+            session()->setFlashdata("success", "Carrera registrada con éxito");
         } else {
-            return view('admin/carreras/create');
+            return view('admin/carreras/create', $data);
         }
 
     }
 
 
-    public function delete($id)
+
+
+    public function edit($id = null)
     {
-        $this->carreraModel->delete($id);
+        // $carreraModel = new UsuarioModel();
+        $data['carrera'] = $this->carreraModel->find($id);
+
+        return view('admin/carreras/edit', $data);
+    }
+
+
+
+    public function update($id = null)
+    {
+        $data = [
+            'id'            => $this->request->getVar('id'),
+            'nombre'        => $this->request->getVar('nombre'),
+            'descripcion'   => $this->request->getVar('descripcion')
+        ];
+
+        $this->carreraModel->update($id, $data);
+
         return redirect()->to('/admin/carreras');
     }
+
+
+
+    public function delete($id = null)
+    {
+        $this->carreraModel->delete($id);
+
+        return redirect()->to('/admin/carreras');
+    }
+
+
 
 }

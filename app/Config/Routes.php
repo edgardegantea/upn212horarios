@@ -49,9 +49,6 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('mp', 'Admin\MapaCurricular::index');
 
     // Rutas para carreras
-    $routes->get('carreras', 'Admin\CarreraController::index');
-    $routes->get('carreras/create', 'Admin\CarreraController::create');
-    $routes->post('carreras/store', 'Admin\CarreraController::store');
 
     // Rutas para información de docente
     $routes->get('dinfo', 'Admin\DocenteInfoController::index');
@@ -93,6 +90,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 
     // RUTAS DE TIPO RESOURCE
     $routes->resource('asignaturas', ['controller' => 'Admin\AsignaturaController']);
+    $routes->resource('carreras', ['controller' => 'Admin\CarreraController']);
 
 });
 
