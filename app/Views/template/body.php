@@ -99,7 +99,7 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-                    <li class="nav-item menu-open">
+                    <!-- <li class="nav-item menu-open">
                         <a href="<?= site_url('admin/horario'); ?>" class="nav-link active">
                         <i class="nav-icon fas fa-square-poll-horizontal"></i>
                             <p>
@@ -107,7 +107,7 @@
                             </p>
                         </a>
 
-                    </li>
+                    </li> -->
 
 
                     <li class="nav-item menu-open">
