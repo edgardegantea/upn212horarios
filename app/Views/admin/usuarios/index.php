@@ -3,6 +3,7 @@
 <?= $this->section('content') ?>
 
 
+
     
     <h2>Usuarios registrados en el sistema</h2>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
@@ -10,14 +11,17 @@
         <a class="btn btn-primary" href="<?= site_url('admin/usuarios/new'); ?>">Nuevo</a>    
     </div>
 
-    <table class="table table-striped table-justify">
+    <table id="example" class="table table-striped" style="width:100%">
         <thead>
-            <th>Nombre del usuario</th>
-            <th>Tipo de usuario</th>
-            <th>Username</th>
-            <th>Correo electrónico</th>
-            <th>Sexo</th>
-            <th>Acciones</th>
+            <tr>
+               <th>Nombre del usuario</th>
+                <th>Tipo de usuario</th>
+                <th>Username</th>
+                <th>Correo electrónico</th>
+                <th>Sexo</th>
+                <th>Acciones</th> 
+            </tr>
+            
         </thead>
         <tbody>
             
@@ -47,10 +51,11 @@
                     <td>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="<?= base_url('admin/usuarios/'.$usuario['id'].'/edit'); ?>" class="btn btn-sm btn-light me-md-2 mr-1"><i class="fas fa-edit"></i></a>
-                        <form class="display-none" method="post" action="<?= base_url('admin/usuarios/'.$usuario['id']); ?>" id="usuarioDeleteForm<?=$usuario['id']?>">
+                        <form method="post" action="<?= base_url('admin/usuarios/'.$usuario['id']); ?>" id="usuarioDeleteForm<?=$usuario['id']?>">
                             <input type="hidden" name="_method" value="DELETE"/>
-                            <a href="javascript:void(0)" onclick="deleteUsuario('usuarioDeleteForm<?=$usuario['id']; ?>')" class="btn btn-sm btn-danger" title="Eliminar registro"><i class="fas fa-trash"></i></a>
+                            <a href="javascript:void(0)" onclick="deleteUsuario('usuarioDeleteForm<?=$usuario['id']; ?>')" class="btn btn-sm btn-danger mr-1" title="Eliminar registro"><i class="fas fa-trash"></i></a>
                         </form>
+                        <a href="<?php echo base_url('admin/usuarios/edit_password/' . $usuario['id']); ?>" class="btn bt-sm btn-default mr-1"><i class="fas fa-key"></i></a>
                         </div>
                         
                     </td>
@@ -58,9 +63,27 @@
             <?php endforeach; ?>
 
         </tbody>
+        <tfoot>
+            <tr>
+               <th>Nombre del usuario</th>
+                <th>Tipo de usuario</th>
+                <th>Username</th>
+                <th>Correo electrónico</th>
+                <th>Sexo</th>
+                <th>Acciones</th> 
+            </tr>
+            
+        </tfoot>
     </table>
 
-
+	
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 
 
 <script>
@@ -74,3 +97,4 @@
 
 
 <?= $this->endSection(); ?>
+

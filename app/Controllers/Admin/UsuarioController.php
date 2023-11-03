@@ -138,4 +138,40 @@ class UsuarioController extends ResourceController
         return view('admin/docentes/index', $data);
     }
 
+
+
+    public function editPassword($id)
+    {
+        $usuarioModel = new UsuarioModel();
+        $data['usuario'] = $usuarioModel->find($id);
+
+        if (!$data['usuario']) {
+            return redirect()->to('/admin/usuarios')->with('error', 'Usuario no encontrado.');
+        }
+
+        return view('admin/usuarios/edit_password', $data);
+    }
+
+
+    public function updatePassword($id)
+    {
+        $usuarioModel = new UsuarioModel();
+        $usuario = $usuarioModel->find($id);
+
+        if (!$usuario) {
+            return redirect()->to('/admin/usuarios')->with('error', 'Usuario no encontrado.');
+        }
+
+        $newPassword = $this->request->getPost('new_password');
+        if (empty($newPassword)) {
+            return redirect()->back()->with('error', 'La nueva contraseña no debe estar vacía.');
+        }
+
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        $usuarioModel->update($id, ['password' => $hashedPassword]);
+
+        return redirect()->to('/admin/usuarios')->with('success', 'Contraseña actualizada exitosamente.');
+    }
+
 }

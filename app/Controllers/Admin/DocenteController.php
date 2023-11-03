@@ -87,4 +87,17 @@ class DocenteController extends BaseController
         $this->docenteModel->delete($id);
         return redirect()->to(base_url('/admin/docentes'));
     }
+
+
+    public function informacionDelDocente() {
+        $db = \Config\Database::connect();
+
+        $informacionDelDocente = $db->query('select usuarios.*, expedientes.* from usuarios join expedientes on usuarios.id = expedientes.docente')->getResultArray();
+
+        $data = [
+            'idd' => $informacionDelDocente
+        ];
+
+        return view('admin/docentes/dinfo', $data);
+    }
 }

@@ -42,10 +42,17 @@ class GrupoController extends ResourceController
 
     public function new()
     {
+        return view('admin/grupos/create');
+    }
+
+
+    
+
+    public function create()
+    {
         $data = [
             'clave'         => $this->request->getVar('clave'),
-            'nombre'        => $this->request->getVar('nombre'),
-            'descripcion'   => $this->request->getVar('descripcion'),
+            'nombre'        => $this->request->getVar('nombre')
         ];
 
         $rules = [
@@ -65,17 +72,13 @@ class GrupoController extends ResourceController
 
     
 
-    public function create()
-    {
-        //
-    }
-
-
-    
-
     public function edit($id = null)
     {
-        //
+        $data = [
+            'grupo' => $this->grupoModel->find($id)
+        ];
+
+        return view('admin/grupos/edit', $data);
     }
 
 
@@ -83,7 +86,15 @@ class GrupoController extends ResourceController
 
     public function update($id = null)
     {
-        //
+        $data = [
+            'id'            => $this->request->getVar('id'),
+            'clave'         => $this->request->getVar('clave'),
+            'nombre'        => $this->request->getVar('nombre')
+        ];
+
+        $this->grupoModel->update($id, $data);
+
+        return redirect()->to('/admin/grupos');
     }
 
 
