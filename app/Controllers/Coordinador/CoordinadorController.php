@@ -19,6 +19,6 @@ class CoordinadorController extends BaseController
 
     public function index()
     {
-        echo 'Index de CoordinadorController';
+        return view('coordinador/dashboard');
     }
 }

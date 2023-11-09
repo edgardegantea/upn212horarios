@@ -69,7 +69,7 @@
     <!-- INICIA ASIDE -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-        <a href="<?= base_url('admin') ?>" class="brand-link text-center">
+        <a href="<?= base_url('docente') ?>" class="brand-link text-center">
             <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
             UPN 212 Teziutlán
             <span class="brand-text font-weight-light"></span>

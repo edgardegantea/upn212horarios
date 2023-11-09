@@ -39,7 +39,7 @@ class ProgramacionController extends BaseController
     {
 
         $data['asignaturas'] = $this->asignaturaModel->findAll();
-        $data['docentes'] = $this->usuarioModel->where('rol', 'docente')->findAll();
+        $data['docentes'] = $this->usuarioModel->where('rol', 'docente')->orderBy('nombre', 'asc')->findAll();
         $data['carreras'] = $this->carreraModel->findAll();
         $data['asignaciones'] = $this->programacionModel->findAll();
 

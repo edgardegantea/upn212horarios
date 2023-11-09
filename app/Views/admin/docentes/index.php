@@ -13,6 +13,7 @@
     <table class="table table-striped table-justify">
         <thead>
             <th>Nombre del usuario</th>
+            <th>Formación profesional</th>
             <th>Tipo de usuario</th>
             <th>Username</th>
             <th>Correo electrónico</th>
@@ -24,6 +25,18 @@
             <?php foreach($usuariosDocentes as $usuario): ?>
                 <tr>
                     <td><?= $usuario['nombre'] . ' ' . $usuario['apaterno'] . ' ' . $usuario['amaterno'] ?></td>
+                    <td>
+                        <?php if($usuario['licenciatura']): ?>
+                            <p><?= $usuario['licenciatura'] ?></p>
+                        <?php endif; ?>
+                        <?php if($usuario['maestria']): ?>
+                            <p><?= $usuario['maestria'] ?></p>
+                        <?php endif; ?>
+                        <?php if($usuario['doctorado']): ?>
+                            <p><?= $usuario['doctorado'] ?></p>
+                        <?php endif; ?>
+                        
+                    </td>
                     <td>
                         <?php if($usuario['rol'] == 'docente'): ?>
                             Docente

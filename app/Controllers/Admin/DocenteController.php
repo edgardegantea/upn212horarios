@@ -26,7 +26,7 @@ class DocenteController extends BaseController
         $db = \Config\Database::connect();
         $estatusdd = $db->query('select e.nombre as status from estatus_del_personal as e join docentes as d on d.estatus = e.id')->getResultArray();
 
-        $docentes = $db->query('select d.id, d.usuario, d.horas_asignadas, di.nombre, di.aPaterno, di.aMaterno, di.genero, exp.docente, exp.licenciatura, edp.nombre as estatus from docentes as d join docenteinfo as di on d.id = di.id join expedientes as exp on d.id = exp.docente join estatus_del_personal as edp on d.estatus = edp.id')->getResultArray();
+        $docentes = $db->query('select d.id, d.usuario, d.horas_asignadas, di.nombre, di.aPaterno, di.aMaterno, di.genero, exp.docente, exp.licenciatura as licenciatura, exp.maestria, exp.doctorado, edp.nombre as estatus from docentes as d join docenteinfo as di on d.id = di.id join expedientes as exp on d.id = exp.docente join estatus_del_personal as edp on d.estatus = edp.id')->getResultArray();
 
         // $data['docentes'] = $this->docenteModel->getDocentes();
         $data['docentes'] = $docentes;

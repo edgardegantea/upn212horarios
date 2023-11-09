@@ -2,6 +2,7 @@
 
 <?= $this->section('content') ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
 <style>
     .modal {
@@ -114,14 +115,14 @@
             <label for="materia_id">Asignatura</label>
             <select class="form-control" name="materia_id" required>
                 <?php foreach ($asignaturas as $asignatura) : ?>
-                    <option value="<?= $asignatura['id']; ?>"><?= $asignatura['nombre']; ?></option>
+                    <option value="<?= $asignatura['id']; ?>"><?= $asignatura['nombre'] ?></option>
                 <?php endforeach; ?>
             </select><br>
 
             <label for="docente_id">Docente</label>
-            <select class="form-control" name="docente_id" required>
+            <select id="miSelect" class="form-control" name="docente_id" required>
                 <?php foreach ($docentes as $docente) : ?>
-                    <option value="<?= $docente['id']; ?>"><?= $docente['nombre']; ?></option>
+                    <option class="text-uppercase" value="<?= $docente['id']; ?>"><?= $docente['nombre'] . ' ' . $docente['apaterno'] . ' ' . $docente['amaterno'] ?></option>
                 <?php endforeach; ?>
             </select><br>
 
@@ -166,6 +167,14 @@
 
 
 <hr>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    
+<script>
+        $(document).ready(function() {
+            $('#miSelect').select2();
+        });
+    </script>
 
 
 <script>

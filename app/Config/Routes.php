@@ -101,6 +101,39 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 // Rutas para el coordinador
 $routes->group('coordinador', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'Coordinador\CoordinadorController::index');
+
+
+    $routes->get('usuarios/edit_password/(:num)', 'Coordinador\UsuarioController::editPassword/$1'); // Mostrar formulario para editar la contraseña
+    $routes->post('usuarios/update_password/(:num)', 'Coordinador\UsuarioController::updatePassword/$1'); // Actualizar la contraseña del usuario
+
+
+    $routes->get('usuarios/ud', 'Coordinador\UsuarioController::usuariosDocentes');
+
+
+    // Rutas tipo resource
+    // $routes->resource('usuarios', ['controller' => 'Admin\UsuarioController']);
+    $routes->get('usuarios', 'Coordinador\UsuarioController::index');
+    $routes->get('usuarios/create', 'Coordinador\UsuarioController::create');
+    $routes->post('usuarios/store', 'Coordinador\UsuarioController::store');
+    $routes->get('usuarios/edit/(:num)', 'Coordinador\UsuarioController::edit/$1');
+    $routes->post('usuarios/update/(:num)', 'Coordinador\UsuarioController::update/$1');
+    $routes->get('usuarios/delete/(:num)', 'Coordinador\UsuarioController::delete/$1');
+
+    
+    // Rutas para información de docente
+    $routes->get('dinfo', 'Coordinador\DocenteInfoController::index');
+
+    // Rutas para docentes
+    $routes->get('docentes', 'Coordinador\DocenteController::index');
+    $routes->get('docentes/create', 'Coordinador\DocenteController::create');
+    $routes->post('docentes/store', 'Coordinador\DocenteController::store');
+    $routes->get('docentes/idd', 'Coordinador\DocenteController::informacionDelDocente');
+
+    // RUTAS DE TIPO RESOURCE
+    $routes->resource('asignaturas', ['controller' => 'Coordinador\AsignaturaController']);
+    $routes->resource('carreras', ['controller' => 'Coordinador\CarreraController']);
+    $routes->resource('grupos', ['controller' => 'Coordinador\GrupoController']);
+    $routes->resource('pescolares', ['controller' => 'Coordinador\PeriodoEscolarController']);
 });
 
 // Rutas para el docente
@@ -111,7 +144,7 @@ $routes->group('docente', ['filter' => 'auth'], function ($routes) {
         $routes->get('create', 'Docente\DocenteInfoController::create');
         $routes->post('store', 'Docente\DocenteInfoController::store');
         $routes->get('edit/(:num)', 'Docente\DocenteInfoController::edit/$1');
-       $routes->post('update/(:num)', 'Docente\DocenteInfoController::update/$1');
+        $routes->post('update/(:num)', 'Docente\DocenteInfoController::update/$1');
         $routes->add('delete/(:num)', 'Docente\DocenteInfoController::delete/$1');
     });
 
