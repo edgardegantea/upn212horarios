@@ -28,6 +28,28 @@
                 </div>
             </div>
 
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Selecionar periodo escolar:</label>
+                        <select name="periodo_escolar" id="">
+                            <?php foreach ($pescolares as $pe): ?>
+                            <option value="<?= $pe['id'] ?>"><?= $pe['nombre'] ?> [<?= $pe['fecha_inicio'] . ' - ' . $pe['fecha_fin'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"></div>
+                </div>
+            </div>
             
 
             <div class="row mb-3 mt-5">
