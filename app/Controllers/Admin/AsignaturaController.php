@@ -64,7 +64,7 @@ class AsignaturaController extends ResourceController
             'nombre'        => $this->request->getVar('nombre'),
             'clave'         => $this->request->getVar('clave'),
             'descripcion'   => $this->request->getVar('descripcion'),
-            'carrera'       => $this->request->getVar('carrera'),
+            // 'carrera'       => $this->request->getVar('carrera'),
             'creditos'      => $this->request->getVar('creditos')
         ];
 

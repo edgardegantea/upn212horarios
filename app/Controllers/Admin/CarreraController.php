@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\AsignaturaModel;
+use App\Models\CarrerasAsignaturasModel;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\CarreraModel;
 use App\Models\UsuarioModel;
@@ -12,6 +14,8 @@ class CarreraController extends ResourceController
     private $carreraModel;
     private $usuarioModel;
     private $docentesCarrerasModel;
+    private $asignaturaModel;
+    private $carrerasAsignaturasModel;
 
     public function __construct()
     {
@@ -20,6 +24,8 @@ class CarreraController extends ResourceController
         $this->carreraModel = new CarreraModel();
         $this->usuarioModel = new UsuarioModel();
         $this->docentesCarrerasModel = new DocentesCarrerasModel();
+        $this->asignaturaModel = new AsignaturaModel();
+        $this->carrerasAsignaturasModel = new CarrerasAsignaturasModel();
     }
 
     
@@ -177,6 +183,67 @@ class CarreraController extends ResourceController
 
         // Redirigir a la página de detalles de la carrera o a donde desees
         return redirect()->to('admin/carreras/vdxc/' . $carreraId)->with('success', 'Asignación de docentes guardada correctamente.');
+    }
+
+
+
+
+
+
+    public function verAsignaturas($carrera)
+    {
+        $db = \Config\Database::connect();
+
+        $docentesxc = $db->query('select a.clave, a.nombre as asignatura, c.id as id, c.nombre as nombreCarrera from asignaturas as a join asignaturas_carreras as ac on ac.asignatura = a.id join carreras as c on ac.carrera = c.id where c.id =' . $carrera)->getResultArray();
+
+        $data = [
+            'asignaturasxc' => $docentesxc
+        ];
+
+        // Puedes cargar una vista específica para mostrar los docentes adscritos
+        return view('admin/carreras/asignaturas', $data);
+    }
+
+    public function asignarAsignaturas($carrera)
+    {
+        $asignaturas = $this->asignaturaModel->orderBy('nombre', 'asc')->findAll();
+        $carreras = $this->carreraModel->find($carrera);
+
+        $data = [
+            'asignaturas' => $asignaturas,
+            'carrera' => $carreras
+        ];
+
+        return view('admin/carreras/asignar_asignaturas', $data);
+    }
+
+    public function guardarAsignacionAsignaturas()
+    {
+
+        $carreraId = $this->request->getPost('carrera_id');
+        $asignaturasSeleccionadas = $this->request->getPost('asignaturas');
+
+        // Validar datos
+        if (empty($asignaturasSeleccionadas)) {
+            // Manejar el caso en el que no se hayan seleccionado docentes
+            return redirect()->to('admin/carreras/asignarAsignaturas/' . $carreraId)->with('error', 'Debes seleccionar al menos una asignatura.');
+        }
+
+        // Eliminar asignaciones anteriores para esta carrera
+        // $this->docentesCarrerasModel->where('carrera', $carreraId)->delete();
+
+        // Guardar las nuevas asignaciones en la base de datos
+        foreach ($asignaturasSeleccionadas as $asignaturaId) {
+            $data = [
+                'carrera' => $carreraId,
+                'asignatura' => $asignaturaId,
+            ];
+
+            $this->carrerasAsignaturasModel->insert($data);
+        }
+
+        // Redirigir a la página de detalles de la carrera o a donde desees
+        return redirect()->to('admin/carreras/vaxc/' . $carreraId)->with('success', 'Asignaturas agregadas correctamente.');
     }
 
 }

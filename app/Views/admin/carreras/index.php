@@ -2,6 +2,11 @@
 
 <?= $this->section('content') ?>
 
+<?php $this->docentesCarrerasModel = new \App\Models\DocentesCarrerasModel(); ?>
+<?php $this->carrerasAsignaturasModel = new \App\Models\CarrerasAsignaturasModel(); ?>
+
+
+
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
 <div class="">
@@ -20,19 +25,19 @@
             <th>ACCIONES</th>
         </thead>
         <tbody>
-        <?php $this->docentesCarrerasModel = new \App\Models\DocentesCarrerasModel(); ?>
+
             <?php foreach($carreras as $carrera): ?>
                 <tr>
                     <td><?= $carrera['nombre']; ?></td>
                     <td>
-                        <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/asignarDocentes/'.$carrera['id']); ?>">Agregar docentes</a>
+                        <a class="btn btn-sm btn-secondary mr-1" href="<?= base_url('admin/carreras/asignarDocentes/'.$carrera['id']); ?>">Agregar docentes</a>
                         <!-- Enlace para ver docentes adscritos -->
-                        <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/vdxc/'.$carrera['id']); ?>">Ver <?= count($this->docentesCarrerasModel->where('carrera', $carrera['id'])->findAll()); ?> docentes</a>
+                        <a class="btn btn-sm btn-secondary mr-1" href="<?= base_url('admin/carreras/vdxc/'.$carrera['id']); ?>">Ver <?= count($this->docentesCarrerasModel->where('carrera', $carrera['id'])->findAll()); ?> docentes</a>
                     </td>
                     <td>
-                        <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/asignarDocentes/'.$carrera['id']); ?>">Agregar Asignaturas</a>
+                        <a class="btn btn-sm btn-secondary mr-1" href="<?= base_url('admin/carreras/asignarAsignaturas/'.$carrera['id']); ?>">Agregar Asignaturas</a>
                         <!-- Enlace para ver docentes adscritos -->
-                        <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/vdxc/'.$carrera['id']); ?>">Ver <?= count($this->docentesCarrerasModel->where('carrera', $carrera['id'])->findAll()); ?> asignaturas</a>
+                        <a class="btn btn-sm btn-secondary mr-1" href="<?= base_url('admin/carreras/vaxc/'.$carrera['id']); ?>">Ver <?= count($this->carrerasAsignaturasModel->where('carrera', $carrera['id'])->findAll()); ?> asignaturas</a>
                     <td>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="<?= base_url('admin/carreras/'.$carrera['id'].'/edit'); ?>" class="btn btn-sm btn-light me-md-2 mr-1"><i class="fas fa-edit"></i></a>

@@ -40,6 +40,11 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('carreras/vdxc/(:num)', 'Admin\CarreraController::verDocentes/$1');
     $routes->get('carreras/asignarDocentes/(:num)', 'Admin\CarreraController::asignarDocentes/$1');
     $routes->post('carreras/guardarAsignacion', 'Admin\CarreraController::guardarAsignacion');
+
+    $routes->get('carreras/vaxc/(:num)', 'Admin\CarreraController::verAsignaturas/$1');
+    $routes->get('carreras/asignarAsignaturas/(:num)', 'Admin\CarreraController::asignarAsignaturas/$1');
+    $routes->post('carreras/guardarAsignacionAsignaturas', 'Admin\CarreraController::guardarAsignacionAsignaturas');
+
     
 
     $routes->get('usuarios/edit_password/(:num)', 'Admin\UsuarioController::editPassword/$1'); // Mostrar formulario para editar la contraseña
@@ -69,7 +74,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     
     
     // Rutas tipo resource
-    $routes->resource('usuarios', ['controller' => 'Admin\UsuarioController']);
+
     $routes->get('usuarios', 'Admin\UsuarioController::index');
     $routes->get('usuarios/create', 'Admin\UsuarioController::create');
     $routes->post('usuarios/store', 'Admin\UsuarioController::store');
@@ -78,6 +83,16 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('usuarios/delete/(:num)', 'Admin\UsuarioController::delete/$1');
 
 
+    $routes->get('programacion/getAsignaturas/(:num)', 'ProgramacionController::getAsignaturas/$1');
+    $routes->get('programacion/get_docentes_by_carrera/(:num)', 'ProgramacionController::getDocentesByCarrera/$1');
+    // $routes->get('programacion/get_docentes_by_carrera/(:num)', 'ProgramacionController::getDocentesByCarrera/$1');
+
+    $routes->post('programacion/asignaturasPorCarrera', 'ProgramacionController::asignaturasPorCarrera');
+    $routes->get('programacion/getAsignaturasByCarrera/(:num)', 'ProgramacionController::getAsignaturasByCarrera/$1');
+    $routes->get('programacion/getDocentesByCarrera/(:num)', 'ProgramacionController::getDocentesByCarrera/$1');
+
+    $routes->get('programacion/getAsignaturasPorCarrera/(:num)', 'ProgramacionController::getAsignaturasPorCarrera/$1');
+    $routes->get('programacion/obtenerAsignaturas', 'ProgramacionController::obtenerAsignaturas');
 
     $routes->get('programacion/createxd', 'ProgramacionController::createxdocente');
     $routes->post('programacion/storexd', 'ProgramacionController::storexdocente');
@@ -103,6 +118,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->resource('carreras', ['controller' => 'Admin\CarreraController']);
     $routes->resource('grupos', ['controller' => 'Admin\GrupoController']);
     $routes->resource('pescolares', ['controller' => 'Admin\PeriodoEscolarController']);
+    $routes->resource('usuarios', ['controller' => 'Admin\UsuarioController']);
 });
 
 

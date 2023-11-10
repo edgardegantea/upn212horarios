@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DocenteModel extends Model
+class CarrerasAsignaturasModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'docentes';
+    protected $table            = 'asignaturas_carreras';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['rol', 'username', 'password', 'horas_asignadas', 'estatus'];
+    protected $allowedFields    = ['carrera', 'asignatura', 'comentario'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,23 +38,4 @@ class DocenteModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-
-    public function getDocentes()
-    {
-        return $this->findAll();
-    }
-
-
-    public function getEstatusDelDocente()
-    {
-        $db = \Config\Database::connect();
-
-        $estatus = $db->query('select e.nombre as status from estatus_del_personal as e join docentes as d on e.id = d.estatus');
-
-        return $estatus->getResultArray();
-    }
-
-
-
 }
