@@ -16,9 +16,9 @@ class Expediente extends Migration
             'bio'                   => ['type' => 'text', 'null' => true],
             
 
-            'licenciatura'          => ['type' => 'varchar', 'constraint' => 150],
-            'lic_num_cedula'        => ['type' => 'varchar', 'constraint' => 15],
-            'licenciatura_cedula'   => ['type' => 'varchar', 'constraint' => 150],
+            'licenciatura'          => ['type' => 'varchar', 'constraint' => 150, 'null' => true],
+            'lic_num_cedula'        => ['type' => 'varchar', 'constraint' => 15, 'num' => true],
+            'licenciatura_cedula'   => ['type' => 'varchar', 'constraint' => 150, 'null' => true],
             'fecha_titulacion_lic'  => ['type' => 'date', 'null' => true],
             'maestria'              => ['type' => 'varchar', 'constraint' => 150, 'null' => true],
             'mae_num_cedula'        => ['type' => 'varchar', 'constraint' => 15, 'null' => true],
