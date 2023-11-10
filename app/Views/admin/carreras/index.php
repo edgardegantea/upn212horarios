@@ -14,22 +14,27 @@
 
     <table id="example" class="table table-striped table-justify">
         <thead>
-            <th>Carrera</th>
-            <th>Número de docentes asignados</th>
-            <th>Acciones</th>
+            <th>CARRERAS</th>
+            <th>DOCENTES</th>
+            <th>ASIGNATURAS</th>
+            <th>ACCIONES</th>
         </thead>
         <tbody>
         <?php $this->docentesCarrerasModel = new \App\Models\DocentesCarrerasModel(); ?>
             <?php foreach($carreras as $carrera): ?>
                 <tr>
                     <td><?= $carrera['nombre']; ?></td>
-                    <td><?= count($this->docentesCarrerasModel->where('carrera', $carrera['id'])->findAll()); ?> docentes</td>
+                    <td>
+                        <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/asignarDocentes/'.$carrera['id']); ?>">Agregar docentes</a>
+                        <!-- Enlace para ver docentes adscritos -->
+                        <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/vdxc/'.$carrera['id']); ?>">Ver <?= count($this->docentesCarrerasModel->where('carrera', $carrera['id'])->findAll()); ?> docentes</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/asignarDocentes/'.$carrera['id']); ?>">Agregar Asignaturas</a>
+                        <!-- Enlace para ver docentes adscritos -->
+                        <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/vdxc/'.$carrera['id']); ?>">Ver <?= count($this->docentesCarrerasModel->where('carrera', $carrera['id'])->findAll()); ?> asignaturas</a>
                     <td>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <!-- Botón para asignar docentes -->
-                            <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/asignarDocentes/'.$carrera['id']); ?>">Asignar docentes</a>
-                            <!-- Enlace para ver docentes adscritos -->
-                            <a class="btn btn-sm btn-light mr-1" href="<?= base_url('admin/carreras/vdxc/'.$carrera['id']); ?>">Ver Docentes adscritos</a>
                             <a href="<?= base_url('admin/carreras/'.$carrera['id'].'/edit'); ?>" class="btn btn-sm btn-light me-md-2 mr-1"><i class="fas fa-edit"></i></a>
                             <form class="display-none" method="post" action="<?= base_url('admin/carreras/'.$carrera['id']); ?>" id="carreraDeleteForm<?=$carrera['id']?>">
                                 <input type="hidden" name="_method" value="DELETE"/>
@@ -42,6 +47,12 @@
             <?php endforeach; ?>
 
         </tbody>
+        <tfoot>
+            <th>CARRERAS</th>
+            <th>DOCENTES</th>
+            <th>ASIGNATURAS</th>
+            <th>ACCIONES</th>
+        </tfoot>
     </table>
 
 
