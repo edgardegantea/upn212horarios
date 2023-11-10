@@ -148,6 +148,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="<?= site_url('admin/grupos'); ?>" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Grupos</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="<?= site_url('admin/pescolares'); ?>" class="nav-link">
                             <i class="nav-icon fas fa-shapes"></i>
                             <p>Periodos escolares</p>

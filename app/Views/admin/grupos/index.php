@@ -6,10 +6,7 @@
     
     <h2>Grupos</h2>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
-        <button id="btnAbrirCrearModal" class="btn btn-primary">Crear Producto</button>
-
-
-
+        <!--<button id="btnAbrirCrearModal" class="btn btn-primary mr-1">Crear grupo</button>-->
         <a class="btn btn-primary me-md-2 mr-1" href="<?= site_url('admin/'); ?>">Regresar</a>
         <a class="btn btn-primary" href="<?= site_url('admin/grupos/new'); ?>">Nuevo</a>    
     </div>
@@ -110,46 +107,6 @@
 
 
 
-
-<!-- app/Views/productos/editar_modal.php -->
-<div class="modal fade" id="editarModal" tabindex="" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editarModalLabel">Editar Producto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-               
-
-                <form method="post" action="<?= site_url('admin/grupos/' . $grupo['id']) ?>">
-
-                    <input type="hidden" name="_method" value="PUT">
-
-                    <div class="form-group">
-                        <label for="clave">Clave del grupo:</label>
-                        <input class="form-control" type="text" name="clave" id="clave" value="<?= $grupo['clave'] ?>" required>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="nombre">Nombre del grupo:</label>
-                        <input class="form-control" type="text" name="nombre" id="nombre" value="<?= $grupo['nombre'] ?>" required>
-                    </div>
-
-                
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 
 
