@@ -3,10 +3,25 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UsuarioModel;
+use App\Models\CarreraModel;
 
 class DocentesCarrerasController extends BaseController
 {
-    public function index()
+
+
+    protected $carreraModel;
+    protected $usuarioModel;
+
+
+    public function __construct()
+    {
+        $this->carreraModel = new CarreraModel();
+        $this->usuarioModel = new UsuarioModel();
+    }
+
+
+    public function index2()
     {
         $db = \Config\Database::connect();
         // $dc = $db->query('select * from docentes_carreras')->getResultArray();
@@ -14,4 +29,26 @@ class DocentesCarrerasController extends BaseController
 
         dd($dc);
     }
+
+
+
+    public function index()
+    {
+        $docentes = $this->usuarioModel->where('rol', 'docente')->orderBy('nombre', 'asc')->findAll();
+        $carreras = $this->carreraModel->orderBy('nombre', 'asc')->findAll();
+
+        $db = \Config\Database::connect();
+        $docentesxcarreras = $db->query('select * from docentes_carreras')->getResultArray();
+
+        $data = [
+            'carreras' => $carreras,
+            'docentes' => $docentes,
+            'docentesxcarreras' => $docentesxcarreras
+        ];
+
+        return view('admin/docentescarreras/index', $data);
+    }
+
+
+
 }

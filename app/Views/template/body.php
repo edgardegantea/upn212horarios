@@ -193,9 +193,12 @@
 </div>
 
 
-
-
-<script src="<?php echo base_url('assets/adminlte/js/jquery.min.js'); ?>"></script>
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" class="init">
+        $('#example').DataTable();
+	</script>
+<!-- <script src="<?php echo base_url('assets/adminlte/js/jquery.min.js'); ?>"></script> -->
 <script src="<?php echo base_url('assets/adminlte/js/bootstrap.bundle.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/adminlte/js/dashboard2.js'); ?>"></script>
 <script src="<?php echo base_url('assets/adminlte/js/adminlte.js'); ?>"></script>

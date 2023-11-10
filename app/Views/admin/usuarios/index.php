@@ -2,6 +2,7 @@
 
 <?= $this->section('content') ?>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
 
     
@@ -11,7 +12,7 @@
         <a class="btn btn-primary" href="<?= site_url('admin/usuarios/new'); ?>">Nuevo</a>    
     </div>
 
-    <table id="example" class="table table-striped" style="width:100%">
+    <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
                <th>Nombre del usuario</th>
@@ -27,7 +28,7 @@
             
             <?php foreach($usuarios as $usuario): ?>
                 <tr>
-                    <td><?= $usuario['nombre'] . ' ' . $usuario['apaterno'] . ' ' . $usuario['amaterno'] ?></td>
+                    <td><span class="text-uppercase"><?= $usuario['nombre'] . ' ' . $usuario['apaterno'] . ' ' . $usuario['amaterno'] ?></span></td>
                     <td>
                         <?php if($usuario['rol'] == 'admin'): ?>
                             Administrador
@@ -76,14 +77,7 @@
         </tfoot>
     </table>
 
-	
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
-    </script>
+
 
 
 <script>

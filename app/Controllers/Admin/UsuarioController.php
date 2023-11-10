@@ -20,7 +20,7 @@ class UsuarioController extends ResourceController
 
     public function index()
     {
-        $usuarios = $this->usuario->join('expedientes', 'usuarios.id = expedientes.docente')->orderBy('id', 'desc')->findAll();
+        $usuarios = $this->usuario->join('expedientes', 'usuarios.id = expedientes.docente')->orderBy('nombre', 'asc')->findAll();
 
         $data = [
             'usuarios'  => $usuarios
@@ -129,13 +129,25 @@ class UsuarioController extends ResourceController
 
     public function usuariosDocentes()
     {
-        $usuariosDocentes = $this->usuario->join('expedientes', 'usuarios.id = expedientes.docente')->where('rol', 'docente')->orderBy('id', 'asc')->findAll();
+        $usuariosDocentes = $this->usuario->join('expedientes', 'usuarios.id = expedientes.docente')->where('rol', 'docente')->orderBy('nombre', 'asc')->findAll();
 
         $data = [
             'usuariosDocentes'  => $usuariosDocentes
         ];
 
         return view('admin/docentes/index', $data);
+    }
+
+
+    public function showDocente($id)
+    {
+        $usuario = $this->usuario->join('expedientes', 'usuarios.id = expedientes.docente')->find($id);
+
+        $data = [
+            'usuario' => $usuario
+        ];
+
+        return view('admin/docentes/showDocente', $data);
     }
 
 

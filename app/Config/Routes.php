@@ -35,13 +35,19 @@ $routes->match(['get', 'post'], 'login', 'UserController::login', ["filter" => "
 $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('/', 'Admin\AdminController::index');
 
+    $routes->get('dc', 'DocentesCarrerasController::index');
+
+    $routes->get('carreras/vdxc/(:num)', 'Admin\CarreraController::verDocentes/$1');
+    $routes->get('carreras/asignarDocentes/(:num)', 'Admin\CarreraController::asignarDocentes/$1');
+    $routes->post('carreras/guardarAsignacion', 'Admin\CarreraController::guardarAsignacion');
+    
 
     $routes->get('usuarios/edit_password/(:num)', 'Admin\UsuarioController::editPassword/$1'); // Mostrar formulario para editar la contraseña
     $routes->post('usuarios/update_password/(:num)', 'Admin\UsuarioController::updatePassword/$1'); // Actualizar la contraseña del usuario
 
 
     $routes->get('usuarios/ud', 'Admin\UsuarioController::usuariosDocentes');
-
+    $routes->get('usuarios/id/(:num)', 'Admin\UsuarioController::showDocente/$1');  
 
     // Ruta para horarios
     $routes->get('horario', 'HorarioController::horario');
@@ -53,12 +59,14 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 
     // Rutas para información de docente
     $routes->get('dinfo', 'Admin\DocenteInfoController::index');
+     
 
     // Rutas para docentes
     $routes->get('docentes', 'Admin\DocenteController::index');
     $routes->get('docentes/create', 'Admin\DocenteController::create');
     $routes->post('docentes/store', 'Admin\DocenteController::store');
     $routes->get('docentes/idd', 'Admin\DocenteController::informacionDelDocente');
+    
     
     // Rutas tipo resource
     $routes->resource('usuarios', ['controller' => 'Admin\UsuarioController']);

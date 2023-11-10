@@ -4,16 +4,22 @@ namespace App\Controllers\Admin;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\CarreraModel;
+use App\Models\UsuarioModel;
+use App\Models\DocentesCarrerasModel;
 
 class CarreraController extends ResourceController
 {
     private $carreraModel;
+    private $usuarioModel;
+    private $docentesCarrerasModel;
 
     public function __construct()
     {
         helper(['form', 'url', 'session']);
         $this->session = \Config\Services::session();
         $this->carreraModel = new CarreraModel();
+        $this->usuarioModel = new UsuarioModel();
+        $this->docentesCarrerasModel = new DocentesCarrerasModel();
     }
 
     
@@ -109,5 +115,68 @@ class CarreraController extends ResourceController
     }
 
 
+
+
+    public function verDocentes($carrera)
+    {
+        // Obtener docentes adscritos a la carrera con ID $carreraId
+        // $docentesCarrera = new DocentesCarrerasModel();
+
+        $db = \Config\Database::connect();
+
+        $docentesxc = $db->query('select concat(d.nombre, " ", d.apaterno, " ", d.amaterno) as docente, c.nombre as carrera, dc.id as id from usuarios as d join docentes_carreras as dc on dc.docente = d.id join carreras as c on dc.carrera = c.id where carrera =' . $carrera)->getResultArray();
+        // $data['docentes'] = $this->docenteModel->where('carrera_id', $carreraId)->findAll();
+
+        $data = [
+            'docentesxc' => $docentesxc
+        ];
+
+        // Puedes cargar una vista específica para mostrar los docentes adscritos
+        return view('admin/carreras/docentes_adscritos', $data);
+    }
+
+
+    public function asignarDocentes($carrera)
+    {
+        $docentes = $this->usuarioModel->where('rol', 'docente')->orderBy('nombre', 'asc')->findAll();
+        $carreras = $this->carreraModel->find($carrera);
+
+        $data = [
+            'docentes' => $docentes,
+            'carrera' => $carreras
+        ];
+
+        return view('admin/carreras/asignar_docentes', $data);
+    }
+
+
+    public function guardarAsignacion()
+    {
+
+        $carreraId = $this->request->getPost('carrera_id');
+        $docentesSeleccionados = $this->request->getPost('docentes');
+
+        // Validar datos
+        if (empty($docentesSeleccionados)) {
+            // Manejar el caso en el que no se hayan seleccionado docentes
+            return redirect()->to('carrera/asignar_docentes/' . $carreraId)->with('error', 'Debes seleccionar al menos un docente.');
+        }
+
+        // Eliminar asignaciones anteriores para esta carrera
+        // $this->docentesCarrerasModel->where('carrera', $carreraId)->delete();
+
+        // Guardar las nuevas asignaciones en la base de datos
+        foreach ($docentesSeleccionados as $docenteId) {
+            $data = [
+                'carrera' => $carreraId,
+                'docente' => $docenteId,
+            ];
+
+            $this->docentesCarrerasModel->insert($data);
+        }
+
+        // Redirigir a la página de detalles de la carrera o a donde desees
+        return redirect()->to('admin/carreras/vdxc/' . $carreraId)->with('success', 'Asignación de docentes guardada correctamente.');
+    }
 
 }
