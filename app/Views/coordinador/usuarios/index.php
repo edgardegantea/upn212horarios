@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 
-
+    <!-- HACER QUE EL COORDINADOR SOLO VEA A LOS DOCENTES QUE SON DE SU CARRERA -->
     
     <h2>Usuarios registrados en el sistema</h2>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
@@ -49,15 +49,9 @@
                         <?php endif; ?>
                     </td>
                     <td>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="<?= base_url('coordinador/usuarios/'.$usuario['id'].'/edit'); ?>" class="btn btn-sm btn-light me-md-2 mr-1"><i class="fas fa-edit"></i></a>
-                        <form method="post" action="<?= base_url('coordinador/usuarios/'.$usuario['id']); ?>" id="usuarioDeleteForm<?=$usuario['id']?>">
-                            <input type="hidden" name="_method" value="DELETE"/>
-                            <a href="javascript:void(0)" onclick="deleteUsuario('usuarioDeleteForm<?=$usuario['id']; ?>')" class="btn btn-sm btn-danger mr-1" title="Eliminar registro"><i class="fas fa-trash"></i></a>
-                        </form>
-                        <a href="<?php echo base_url('coordinador/usuarios/edit_password/' . $usuario['id']); ?>" class="btn bt-sm btn-default mr-1"><i class="fas fa-key"></i></a>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="<?= base_url('coordinador/usuarios/'.$usuario['id'].'/edit'); ?>" class="btn btn-sm btn-light me-md-2 mr-1"><i class="fas fa-edit"></i></a>
                         </div>
-                        
                     </td>
                 </tr>
             <?php endforeach; ?>

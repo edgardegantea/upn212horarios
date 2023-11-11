@@ -4,16 +4,23 @@ namespace App\Controllers\Admin;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\GrupoModel;
+use App\Models\PeriodoEscolarModel;
+use App\Models\CarreraModel;
+
 
 class GrupoController extends ResourceController
 {
 
     protected $grupoModel;
+    protected $periodoEscolarModel;
+    protected $carreraModel;
     
 
     public function __construct()
     {
         $this->grupoModel = new GrupoModel();
+        $this->periodoEscolarModel = new PeriodoEscolarModel();
+        $this->carreraModel = new CarreraModel();
     }
 
     
@@ -42,7 +49,15 @@ class GrupoController extends ResourceController
 
     public function new()
     {
-        return view('admin/grupos/create');
+        $pescolares = $this->periodoEscolarModel->findAll();
+        $carreras   = $this->carreraModel->orderBy('nombre', 'asc')->findAll();
+
+        $data = [
+            'pescolares'    => $pescolares,
+            'carreras'      => $carreras
+        ];
+
+        return view('admin/grupos/create', $data);
     }
 
 

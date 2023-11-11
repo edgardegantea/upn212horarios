@@ -83,7 +83,7 @@
                     var options = '<option value="">Seleccionar Asignatura</option>';
 
                     for (var i = 0; i < response.length; i++) {
-                        options += '<option value="' + response[i].id + '">' + response[i].nombre_asignatura + '</option>';
+                        options += '<option value="' + response[i].id + '">' + response[i].clave_asignatura + ' ' +  response[i].nombre_asignatura + '</option>';
                     }
 
                     $('#asignatura').html(options);

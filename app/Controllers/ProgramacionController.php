@@ -252,7 +252,7 @@ class ProgramacionController extends BaseController
     public function getAsignaturasByCarrera($carreraId)
     {
         $asignaturasCarrerasModel = new CarrerasAsignaturasModel();
-        $asignaturas = $asignaturasCarrerasModel->select('asignaturas_carreras.id, asignaturas.nombre as nombre_asignatura, asignaturas_carreras.comentario')
+        $asignaturas = $asignaturasCarrerasModel->select('asignaturas_carreras.id, asignaturas.clave as clave_asignatura, asignaturas.nombre as nombre_asignatura, asignaturas_carreras.comentario')
             ->join('asignaturas', 'asignaturas_carreras.asignatura = asignaturas.id')
             ->where('carrera', $carreraId)
             ->findAll();
@@ -269,6 +269,7 @@ class ProgramacionController extends BaseController
         $docentes = $docentesCarreraModel->select('docentes_carreras.id, usuarios.nombre as nombre, usuarios.apaterno as apaterno, usuarios.amaterno as amaterno')
             ->join('usuarios', 'docentes_carreras.docente = usuarios.id')
             ->where('docentes_carreras.carrera', $carreraId)
+            ->orderBy('nombre', 'asc')
             ->findAll();
 
         return json_encode($docentes);
