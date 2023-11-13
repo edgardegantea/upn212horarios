@@ -88,56 +88,44 @@ class AsignaturaController extends ResourceController
 
     public function edit($id = null)
     {
-        $usuario = new UsuarioModel();
-        $data['usuario'] = $usuario->find($id);
+        $data['asignatura'] = $this->asignaturaModel->find($id);
 
-        return view('admin/usuarios/edit', $data);
+        return view('admin/asignaturas/edit', $data);
     }
 
 
 
     public function update($id = null)
     {
-        $usuario = new UsuarioModel();
         $data = [
-            'rol' => $this->request->getVar('rol'),
-            'nombre' => $this->request->getVar('nombre'),
-            'apaterno' => $this->request->getVar('apaterno'),
-            'amaterno' => $this->request->getVar('amaterno'),
-            'username' => $this->request->getVar('username'),
-            'email' => $this->request->getVar('email'),
-            'password' => password_hash($this->request->getVar('password'), PASSWORD_BCRYPT),
-            'sexo' => $this->request->getVar('sexo'),
-            'fechaNacimiento' => $this->request->getVar('fechaNacimiento'),
-            'status' => $this->request->getVar('status')
+            'nombre'        => $this->request->getVar('nombre'),
+            'clave'         => $this->request->getVar('clave'),
+            'descripcion'   => $this->request->getVar('descripcion'),
+            'creditos'      => $this->request->getVar('creditos')
         ];
 
-        $usuario->update($id, $data);
+        $this->asignaturaModel->update($id, $data);
 
-        return redirect()->to('/admin/usuarios');
+        return redirect()->to('/admin/asignaturas');
     }
 
 
 
     public function delete($id = null)
     {
-        $usuario = new UsuarioModel();
-        $usuario->delete($id);
-
-        return redirect()->to('/admin/usuarios');
+        try {
+            $this->asignaturaModel->delete($id);
+            return redirect()->to('/admin/asignaturas');
+        } catch (\Exception $e) {
+            if (strpos($e->getMessage(), 'Cannot delete or update a parent row') !== false) {
+                $mensaje =  'No se puede eliminar esta asignatura ya que se encuentra agregada en una carrera, consulte al desarrollador o al administrador del sistema para solucionarlo.';
+            } else {
+                $mensaje = 'Error al intentar eliminar el registro';
+            }
+        }
+        
     }
 
 
-
-    public function usuariosDocentes()
-    {
-        $usuariosDocentes = $this->usuario->where('rol', 'docente')->orderBy('id', 'asc')->findAll();
-
-        $data = [
-            'usuariosDocentes'  => $usuariosDocentes
-        ];
-
-        return view('admin/docentes/index', $data);
-    }
 
 }
