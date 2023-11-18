@@ -14,6 +14,18 @@
                 <label for="nombre">Nombre:</label>
                 <input class="form-control" type="text" name="nombre" id="nombre" value="<?= $carrera['nombre'] ?>" required>
             </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="form-group">
+                        <label for=""></label>
+                        <select name="tipo" id="">
+                            <option value="carrera">Carrera</option>
+                            <option value="curso">Curso</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             
             <div class="form-group">
                 <label for="descripcion">Descripción:</label>

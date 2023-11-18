@@ -13,7 +13,7 @@ class GrupoModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['clave', 'nombre'];
+    protected $allowedFields    = ['clave', 'nombre', 'periodo_escolar', 'carrera', 'modalidad', ];
 
     // Dates
     protected $useTimestamps = true;

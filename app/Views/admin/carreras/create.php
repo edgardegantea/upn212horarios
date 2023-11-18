@@ -18,6 +18,19 @@
                 </div>
             </div>
 
+
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="form-group">
+                        <label for=""></label>
+                        <select name="tipo" id="">
+                            <option value="carrera">Carrera</option>
+                            <option value="curso">Curso</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div class="row mb-3">
                 <div class="col">
                     <div class="form-group">

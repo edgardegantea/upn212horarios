@@ -13,21 +13,22 @@
 
     <table class="table table-striped table-justify">
         <thead>
-            <th>Algo</th>
+            <th>Carrera</th>
             <th>Clave</th>
             <th>Grupo</th>
-            <th>Información adicional</th>
+            <th>Periodo escolar</th>
+            <th>Modalidad</th>
             <th>Acciones</th>
         </thead>
         <tbody>
             
             <?php foreach($grupos as $grupo): ?>
                 <tr>
-                    <td>
-                    <button id="btnAbrirEditarModal" class="btn btn-warning"><?= $grupo['clave'] ?></button>
-                    </td>
+                    <td><?= $grupo['carrera'] ?></td>
                     <td><?= $grupo['clave'] ?></td>
                     <td><?= $grupo['nombre']; ?></td>
+                    <td><?= $grupo['periodo_escolar'] ?></td>
+                    <td><?= $grupo['modalidad'] ?></td>
                     <td><?= $grupo['created_at']; ?></td>
                     <td>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">

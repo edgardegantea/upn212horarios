@@ -41,10 +41,10 @@
                     <td>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="<?= base_url('coordinador/usuarios/'.$usuario['id'].'/edit'); ?>" class="btn btn-sm btn-light me-md-2 mr-1"><i class="fas fa-edit"></i></a>
-                        <form class="display-none" method="post" action="<?= base_url('coordinador/usuarios/'.$usuario['id']); ?>" id="usuarioDeleteForm<?=$usuario['id']?>">
+                        <!-- <form class="display-none" method="post" action="<?= base_url('coordinador/usuarios/'.$usuario['id']); ?>" id="usuarioDeleteForm<?=$usuario['id']?>">
                             <input type="hidden" name="_method" value="DELETE"/>
                             <a href="javascript:void(0)" onclick="deleteUsuario('usuarioDeleteForm<?=$usuario['id']; ?>')" class="btn btn-sm btn-danger" title="Eliminar registro"><i class="fas fa-trash"></i></a>
-                        </form>
+                        </form> -->
                         </div>
                         
                     </td>

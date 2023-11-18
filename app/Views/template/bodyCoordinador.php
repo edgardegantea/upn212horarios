@@ -119,12 +119,12 @@
                     </li>
 
 
-                    <li class="nav-item">
-                        <a href="<?= site_url('coordinador/usuarios'); ?>" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Usuarios</p>
-                        </a>
-                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a href="--><?php //= site_url('coordinador/usuarios'); ?><!--" class="nav-link">-->
+<!--                            <i class="nav-icon fas fa-users"></i>-->
+<!--                            <p>Usuarios</p>-->
+<!--                        </a>-->
+<!--                    </li>-->
 
                     <li class="nav-item">
                         <a href="<?= site_url('coordinador/usuarios/ud'); ?>" class="nav-link">
@@ -140,19 +140,19 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="<?= site_url('coordinador/carreras'); ?>" class="nav-link">
                             <i class="nav-icon fas fa-shapes"></i>
                             <p>Carreras</p>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="<?= site_url('coordinador/pescolares'); ?>" class="nav-link">
                             <i class="nav-icon fas fa-shapes"></i>
                             <p>Periodos escolares</p>
                         </a>
-                    </li>
+                    </li> -->
                     
 
                 </ul>

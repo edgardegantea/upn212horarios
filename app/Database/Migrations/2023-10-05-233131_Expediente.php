@@ -99,4 +99,6 @@ class Expediente extends Migration
     {
         $this->forge->dropTable('expedientes', true);
     }
+
+
 }

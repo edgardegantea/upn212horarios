@@ -20,12 +20,20 @@
         <?php foreach ($programacion as $programa) : ?>
             <tr>
                 <td><?= $programa['id']; ?></td>
-                <td><?= $programa['materia_id']; ?></td>
-                <td><?= $programa['docente_id']; ?></td>
-                <td><?= $programa['carrera_id']; ?></td>
-                <td><?= $programa['hora_inicio']; ?></td>
-                <td><?= $programa['hora_fin']; ?></td>
-                <td><?= $programa['dia_semana']; ?></td>
+                <td><?= $programa['asignatura']; ?></td>
+                <td><?= $programa['docente']; ?></td>
+                <td><?= $programa['carrera']; ?></td>
+                <td>
+                    <?= $programa['dia_semana1'] ?>
+                    <?= $programa['hora_inicio1']; ?>
+                    <?= $programa['hora_fin1'] ?>
+                </td>
+                <td>
+                    <?= $programa['dia_semana2'] ?>
+                    <?= $programa['hora_inicio2']; ?>
+                    <?= $programa['hora_fin2'] ?>
+                </td>
+
                 <td>
                     <a href="/programacion/edit/<?= $programa['id']; ?>">Editar</a>
                     <a href="/programacion/delete/<?= $programa['id']; ?>">Eliminar</a>

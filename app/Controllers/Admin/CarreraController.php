@@ -37,7 +37,7 @@ class CarreraController extends ResourceController
 
         $data = [
             'carreras'  => $carreras,
-            'carreras'  => $carreraModel->orderBy('nombre', 'asc')->findAll()
+            // 'carreras'  => $carreraModel->orderBy('nombre', 'asc')->findAll()
         ];
 
         return view('admin/carreras/index', $data);
@@ -68,6 +68,7 @@ class CarreraController extends ResourceController
 
         $data = [
             'nombre'        => $this->request->getVar('nombre'),
+            'tipo'          => $this->request->getVar('tipo'),
             'descripcion'   => $this->request->getVar('descripcion'),
         ];
 

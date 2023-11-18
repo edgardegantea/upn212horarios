@@ -13,6 +13,8 @@ class Asignatura extends Migration
 
         $this->forge->addField([
             'id'                => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'tipo_asignatura'   => ['type' => 'varchar', 'constraint' => 20],
+            'campo'             => ['type' => 'varchar', 'constraint' => 20],
             'clave'             => ['type' => 'varchar', 'constraint' => 10, 'unique' => true],
             'nombre'            => ['type' => 'varchar', 'constraint' => 255, 'unique' => true],
             'descripcion'       => ['type' => 'text', 'null' => true],

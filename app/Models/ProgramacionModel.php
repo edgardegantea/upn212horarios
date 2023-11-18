@@ -13,7 +13,7 @@ class ProgramacionModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['materia_id', 'docente_id', 'carrera_id', 'hora_inicio', 'hora_fin', 'dia_semana'];
+    protected $allowedFields    = ['materia_id', 'docente_id', 'carrera_id', 'hora_inicio1', 'hora_fin1', 'dia_semana1', 'hora_inicio2', 'hora_fin2', 'dia_semana2', 'grupo'];
 
     // Dates
     protected $useTimestamps = false;

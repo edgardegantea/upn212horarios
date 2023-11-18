@@ -20,6 +20,7 @@
     <table id="example" class="table table-striped table-justify">
         <thead>
             <th>CARRERAS</th>
+            <th>TIPO</th>
             <th>DOCENTES</th>
             <th>ASIGNATURAS</th>
             <th>ACCIONES</th>
@@ -29,6 +30,7 @@
             <?php foreach($carreras as $carrera): ?>
                 <tr>
                     <td><?= $carrera['nombre']; ?></td>
+                    <td><?= $carrera['tipo']; ?></td>
                     <td>
                         <a class="btn btn-sm btn-secondary mr-1" href="<?= base_url('admin/carreras/asignarDocentes/'.$carrera['id']); ?>">Agregar docentes</a>
                         <!-- Enlace para ver docentes adscritos -->
@@ -54,6 +56,7 @@
         </tbody>
         <tfoot>
             <th>CARRERAS</th>
+            <th>TIPO</th>
             <th>DOCENTES</th>
             <th>ASIGNATURAS</th>
             <th>ACCIONES</th>

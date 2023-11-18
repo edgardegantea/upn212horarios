@@ -4,7 +4,7 @@
 
 <h1>Asignación de horarios</h1>
 
-<form>
+<form method="post" action="<?= base_url('admin/programacion/store') ?>">
     <div class="form-group">
         <label for="carrera">Carrera:</label>
         <select class="form-control" name="carrera" id="carrera">
@@ -17,50 +17,78 @@
     <div class="form-group">
         <label for="asignatura">Asignatura:</label>
         <select class="form-control" name="asignatura" id="asignatura" disabled>
-            <!-- Aquí se cargarán las asignaturas dependiendo de la carrera seleccionada -->
         </select>
     </div>
 
     <div class="form-group">
         <label for="docente">Docente:</label>
         <select class="form-control" name="docente" id="docente" disabled>
-            <!-- Aquí se cargarán las asignaturas dependiendo de la carrera seleccionada -->
         </select>
-    </div>
-
-    <div class="form-group">
-        <label for="hora_inicio">Hora de Inicio:</label>
-        <input class="form-control" type="time" name="hora_inicio" id="hora_inicio">
-    </div>
-
-
-    <div class="form-group">
-        <label for="hora_fin">Hora de Fin:</label>
-        <input class="form-control" type="time" name="hora_fin" id="hora_fin">
     </div>
 
     <div class="form-group">
         <label for="grupo">Grupo:</label>
-        <input class="form-control" type="text" name="grupo" id="grupo">
-    </div>
-
-
-    <div class="form-group">
-        <label for="dia_semana">Día de la Semana:</label>
-        <select class="form-control" name="dia_semana" id="">
-            <option value="1">Lunes</option>
-            <option value="2">Martes</option>
-            <option value="3">Miércoles</option>
-            <option value="4">Jueves</option>
-            <option value="5">Viernes</option>
-            <option value="6">Sábado</option>
+        <select class="form-control" name="grupo" id="">
+            <?php foreach($grupos as $grupo): ?>
+                <option value="<?= $grupo['id'] ?>"><?= $grupo['nombre'] ?></option>
+            <?php endforeach; ?>
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="modalidad">Modalidad:</label>
-        <input class="form-control" type="text" name="modalidad" id="modalidad">
-    </div>
+
+    <table>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="dia_semana">Día de la Semana:</label>
+                    <select class="form-control" name="dia_semana1" id="">
+                        <option value="1">Lunes</option>
+                        <option value="2">Martes</option>
+                        <option value="3">Miércoles</option>
+                        <option value="4">Jueves</option>
+                        <option value="5">Viernes</option>
+                        <option value="6">Sábado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hora_inicio">Hora de Inicio:</label>
+                    <input class="form-control" type="time" name="hora_inicio1" id="hora_inicio1">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="hora_fin">Hora de Fin:</label>
+                    <input class="form-control" type="time" name="hora_fin1" id="hora_fin1">
+                </div>
+            </td>
+
+            <td>
+                <div class="form-group">
+                    <label for="dia_semana">Día de la Semana:</label>
+                    <select class="form-control" name="dia_semana2" id="">
+                        <option value="1">Lunes</option>
+                        <option value="2">Martes</option>
+                        <option value="3">Miércoles</option>
+                        <option value="4">Jueves</option>
+                        <option value="5">Viernes</option>
+                        <option value="6">Sábado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hora_inicio">Hora de Inicio:</label>
+                    <input class="form-control" type="time" name="hora_inicio2" id="hora_inicio2">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="hora_fin">Hora de Fin:</label>
+                    <input class="form-control" type="time" name="hora_fin2" id="hora_fin2">
+                </div>
+            </td>
+        </tr>
+    </table>
 
     <div class="form-group">
         <button class="btn btn-primary" type="submit">Guardar</button>
@@ -103,7 +131,7 @@
                     var options = '<option value="">Seleccionar Docente</option>';
 
                     for (var i = 0; i < response.length; i++) {
-                        options += '<option value="' + response[i].id + '">' + response[i].nombre + ' ' + response[i].apaterno + ' ' + response[i].amaterno + '</span></option>';
+                        options += '<option value="' + response[i].id + '">' + response[i].nombre + ' ' + response[i].apaterno + ' ' + response[i].amaterno + '</option>';
                     }
 
                     $('#docente').html(options);

@@ -8,6 +8,7 @@ use App\Models\CarreraModel;
 use App\Models\UsuarioModel;
 use App\Models\CarrerasAsignaturasModel;
 use App\Models\DocentesCarrerasModel;
+use App\Models\GrupoModel;
 
 class ProgramacionController extends BaseController
 {
@@ -18,6 +19,7 @@ class ProgramacionController extends BaseController
     protected $programacionModel;
     protected $docentesCarrerasModel;
     protected $carrerasAsignaturasModel;
+    protected $grupoModel;
 
 
     public function __construct()
@@ -28,14 +30,23 @@ class ProgramacionController extends BaseController
         $this->asignaturaModel = new AsignaturaModel();
         $this->docentesCarrerasModel = new DocentesCarrerasModel();
         $this->carrerasAsignaturasModel = new CarrerasAsignaturasModel();
+        $this->grupoModel = new GrupoModel();
     }
 
 
 
     public function index()
     {
-        $model = new ProgramacionModel();
-        $data['programacion'] = $model->findAll();
+        // $model = new ProgramacionModel();
+        // $data['programacion'] = $model->findAll();
+
+        $db = \Config\Database::connect();
+        $programacionHorarios = $db->query('select p.*, concat(a.clave, " ", a.nombre) as asignatura, u.nombre as docente, c.nombre as carrera from programacion as p left join asignaturas as a on p.materia_id = a.id left join usuarios as u on p.docente_id = u.id left join carreras as c on p.carrera_id = c.id')->getResultArray();
+
+        $data = [
+            'programacion' => $programacionHorarios
+        ];
+
         return view('admin/programacion/index', $data);
     }
 
@@ -89,21 +100,7 @@ class ProgramacionController extends BaseController
 
 
 
-    public function store()
-    {
-        $model = new ProgramacionModel();
-        $data = [
-            'materia_id' => $this->request->getPost('materia_id'),
-            'docente_id' => $this->request->getPost('docente_id'),
-            'carrera_id' => $this->request->getPost('carrera_id'),
-            'hora_inicio' => $this->request->getPost('hora_inicio'),
-            'hora_fin' => $this->request->getPost('hora_fin'),
-            'dia_semana' => $this->request->getPost('dia_semana'),
-            
-        ];
-        $model->insert($data);
-        return redirect()->to('/admin/programacion');
-    }
+
 
 
 
@@ -220,9 +217,33 @@ class ProgramacionController extends BaseController
         $data['carreras'] = $this->carreraModel->findAll();
         $data['asignaturas'] = $this->asignaturaModel->findAll();
         $data['docentes']   = $this->usuarioModel->where('rol', 'docente')->findAll();
+        $data['grupos']     = $this->grupoModel->findAll();
 
         return view('admin/programacion/create', $data);
     }
+
+
+    public function store()
+    {
+        $model = new ProgramacionModel();
+        $data = [
+            'materia_id' => $this->request->getPost('asignatura'),
+            'docente_id' => $this->request->getPost('docente'),
+            'carrera_id' => $this->request->getPost('carrera'),
+            'hora_inicio1' => $this->request->getPost('hora_inicio1'),
+            'hora_fin1' => $this->request->getPost('hora_fin1'),
+            'dia_semana1' => $this->request->getPost('dia_semana1'),
+            'hora_inicio2' => $this->request->getPost('hora_inicio2'),
+            'hora_fin2' => $this->request->getPost('hora_fin2'),
+            'dia_semana2' => $this->request->getPost('dia_semana2'),
+            'grupo' => $this->request->getPost('grupo')
+        ];
+        $model->insert($data);
+        return redirect()->to('/admin/programacion');
+    }
+
+
+
 
 
     public function asignaturasPorCarrera()

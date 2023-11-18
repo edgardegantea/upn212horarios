@@ -67,12 +67,14 @@ class GrupoController extends ResourceController
     {
         $data = [
             'clave'         => $this->request->getVar('clave'),
-            'nombre'        => $this->request->getVar('nombre')
+            'nombre'        => $this->request->getVar('nombre'),
+            'carrera'       => $this->request->getVar('carrera')
         ];
 
         $rules = [
             'clave'     => 'required|is_unique[grupos.clave]',
             'nombre'    => 'required|is_unique[grupos.nombre]',
+            'modalidad' => 'required'
         ];
 
         if ($this->validate($rules)) {

@@ -36,17 +36,17 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">Selecionar periodo escolar:</label>
-                        <select class="form-control" name="periodo_escolar" id="periodo_escolar" oninput="generarClave()">
-                            <?php foreach ($pescolares as $pe): ?>
-                            <option value="<?= $pe['id'] ?>"><?= $pe['nombre'] ?> [<?= $pe['fecha_inicio'] . ' - ' . $pe['fecha_fin'] . ']' ?></option>
+                        <label for="">Seleccionar periodo escolar:</label>
+                        <select class="form-control" name="periodo_escolar" id="periodo_escolar">
+                            <?php foreach($pescolares as $periodo): ?>
+                                <option value="<?= $periodo['id'] ?>"><?= $periodo['nombre'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="">Selecionar carrera:</label>
+                        <label for="">Seleccionar carrera:</label>
                         <select class="form-control" name="carrera" id="carrera" oninput="generarClave()">
                             <?php foreach ($carreras as $carrera): ?>
                             <option value="<?= $carrera['id'] ?>"><?= $carrera['nombre'] ?></option>
@@ -55,7 +55,13 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group"></div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <select name="modalidad" id="" class="form-control">
+                            <option value="semestre">Semestral</option>
+                            <option value="modulo">Modular</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group"></div>
@@ -117,10 +123,8 @@
             var carrera = document.getElementById('carrera').value;
             var nombre = document.getElementById('nombre').value;
 
-            // Genera la clave de grupo (ajusta la lógica según tus necesidades)
             var clave = nombre.substring(0,2) + periodo_escolar.substring(0, 4) + carrera.substring(0, 2);
 
-            // Asigna la clave generada al campo de clave
             document.getElementById('clave').value = clave;
         }
     </script>
