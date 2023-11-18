@@ -247,4 +247,22 @@ class CarreraController extends ResourceController
         return redirect()->to('admin/carreras/vaxc/' . $carreraId)->with('success', 'Asignaturas agregadas correctamente.');
     }
 
+
+
+
+    public function eliminarAsignacion($docente_carrera_id)
+    {
+        $this->docentesCarrerasModel->delete($docente_carrera_id);
+
+        return redirect()->to('admin/carreras');
+    }
+
+
+    public function eliminarAsignacionAsignatura($id)
+    {
+        $this->carrerasAsignaturasModel->delete($id);
+
+        return redirect()->to('admin/carreras');
+    }
+
 }

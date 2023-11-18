@@ -13,6 +13,7 @@
             <tr>
                 <th>Clave</th>
                 <th>Asignatura</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -20,6 +21,7 @@
                 <tr>
                     <td><?= $axc['clave']; ?></td>
                     <td><span class="text-uppercase"><?= $axc['asignatura']?></span></td>
+                    <td><a href="<?= base_url('admin/carreras/eliminarAsignacionAsignatura/' . $axc['id']) ?>">Quitar</a></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

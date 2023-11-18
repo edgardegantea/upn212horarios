@@ -41,11 +41,15 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('carreras/asignarDocentes/(:num)', 'Admin\CarreraController::asignarDocentes/$1');
     $routes->post('carreras/guardarAsignacion', 'Admin\CarreraController::guardarAsignacion');
 
+
     $routes->get('carreras/vaxc/(:num)', 'Admin\CarreraController::verAsignaturas/$1');
     $routes->get('carreras/asignarAsignaturas/(:num)', 'Admin\CarreraController::asignarAsignaturas/$1');
     $routes->post('carreras/guardarAsignacionAsignaturas', 'Admin\CarreraController::guardarAsignacionAsignaturas');
+    $routes->get('carreras/eliminarAsignacion/(:num)', 'Admin\CarreraController::eliminarAsignacion/$1');
+    $routes->get('carreras/eliminarAsignacionAsignatura/(:num)', 'Admin\CarreraController::eliminarAsignacionAsignatura/$1');
 
-    
+
+
 
     $routes->get('usuarios/edit_password/(:num)', 'Admin\UsuarioController::editPassword/$1'); // Mostrar formulario para editar la contraseña
     $routes->post('usuarios/update_password/(:num)', 'Admin\UsuarioController::updatePassword/$1'); // Actualizar la contraseña del usuario

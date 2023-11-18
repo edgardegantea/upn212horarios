@@ -41,7 +41,7 @@ class ProgramacionController extends BaseController
         // $data['programacion'] = $model->findAll();
 
         $db = \Config\Database::connect();
-        $programacionHorarios = $db->query('select p.*, concat(a.clave, " ", a.nombre) as asignatura, u.nombre as docente, c.nombre as carrera from programacion as p left join asignaturas as a on p.materia_id = a.id left join usuarios as u on p.docente_id = u.id left join carreras as c on p.carrera_id = c.id')->getResultArray();
+        $programacionHorarios = $db->query('select p.*, concat(a.clave, " ", a.nombre) as asignatura, concat(u.nombre, " ", u.apaterno, " ", u.amaterno) as docente, c.nombre as carrera from programacion as p left join asignaturas as a on p.materia_id = a.id left join usuarios as u on p.docente_id = u.id left join carreras as c on p.carrera_id = c.id')->getResultArray();
 
         $data = [
             'programacion' => $programacionHorarios
