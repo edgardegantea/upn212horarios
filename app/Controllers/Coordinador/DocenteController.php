@@ -3,20 +3,27 @@
 namespace App\Controllers\Coordinador;
 
 use App\Controllers\BaseController;
+use App\Models\CarreraModel;
 use App\Models\DocenteModel;
 use App\Models\DocenteInfoModel;
 use App\Models\EstatusDelPersonalModel;
+use App\Models\UsuarioModel;
 
 class DocenteController extends BaseController
 {
 
     protected $docenteModel;
     protected $EstatusDelPersonalModel;
+    protected $carreraModel;
+    protected $usuarioModel;
+
 
     public function __construct()
     {
         $this->docenteModel = new DocenteModel();
         $this->estatusDelPersonalModel = new EstatusDelPersonalModel();
+        $this->carreraModel = new CarreraModel();
+        $this->usuarioModel = new UsuarioModel();
     }
 
 
@@ -32,6 +39,13 @@ class DocenteController extends BaseController
         $data['docentes'] = $docentes;
         $data['estatusDelDocente'] = $this->docenteModel->getEstatusDelDocente();
         $data['estatusdd'] = $estatusdd;
+
+
+        $this->session = \Config\Services::session();
+        $carrera = $this->carreraModel->where('coordinador', $this->session->id)->first();
+
+        $docentes = $this->usuarioModel->where('');
+
 
         return view('coordinador/docentes/index', $data);
     }

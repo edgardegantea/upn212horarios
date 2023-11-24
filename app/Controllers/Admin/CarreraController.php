@@ -32,12 +32,13 @@ class CarreraController extends ResourceController
 
     public function index()
     {
-        $carreras = $this->carreraModel->orderBy('nombre', 'asc')->findAll();
-        $carreraModel = new CarreraModel();
+        // $carreras = $this->carreraModel->orderBy('nombre', 'asc')->findAll();
+        $db = \Config\Database::connect();
+        $carreras = $db->query('select concat(u.id, " - ", u.nombre, " ", u.apaterno, " ", u.amaterno) as coord, c.* from carreras as c left join usuarios as u on c.coordinador = u.id')->getResultArray();
 
         $data = [
-            'carreras'  => $carreras,
-            // 'carreras'  => $carreraModel->orderBy('nombre', 'asc')->findAll()
+            'carreras'      => $carreras,
+            // 'coordinador'   => $coordinador
         ];
 
         return view('admin/carreras/index', $data);
@@ -56,8 +57,14 @@ class CarreraController extends ResourceController
 
 
     public function new()
-    { 
-        return view('admin/carreras/create');
+    {
+        $coordinadores = $this->usuarioModel->where('rol', 'coordinador')->orderBy('nombre', 'asc')->findAll();
+
+        $data = [
+            'coordinadores' => $coordinadores
+        ];
+
+        return view('admin/carreras/create', $data);
     }
 
 
@@ -70,6 +77,7 @@ class CarreraController extends ResourceController
             'nombre'        => $this->request->getVar('nombre'),
             'tipo'          => $this->request->getVar('tipo'),
             'descripcion'   => $this->request->getVar('descripcion'),
+            'coordinador'   => $this->request->getVar('coordinador')
         ];
 
         $rules = [
@@ -91,8 +99,12 @@ class CarreraController extends ResourceController
 
     public function edit($id = null)
     {
-        // $carreraModel = new UsuarioModel();
-        $data['carrera'] = $this->carreraModel->find($id);
+        $coordinadores = $this->usuarioModel->where('rol', 'coordinador')->orderBy('nombre', 'asc')->findAll();
+
+        $data = [
+            'coordinadores' => $coordinadores,
+            'carrera'       => $this->carreraModel->find($id)
+        ];
 
         return view('admin/carreras/edit', $data);
     }
@@ -104,7 +116,8 @@ class CarreraController extends ResourceController
         $data = [
             'id'            => $this->request->getVar('id'),
             'nombre'        => $this->request->getVar('nombre'),
-            'descripcion'   => $this->request->getVar('descripcion')
+            'descripcion'   => $this->request->getVar('descripcion'),
+            'coordinador'   => $this->request->getVar('coordinador')
         ];
 
         $this->carreraModel->update($id, $data);
@@ -126,12 +139,13 @@ class CarreraController extends ResourceController
 
     public function verDocentes($carrera)
     {
-        // Obtener docentes adscritos a la carrera con ID $carreraId
-        // $docentesCarrera = new DocentesCarrerasModel();
 
         $db = \Config\Database::connect();
 
-        $docentesxc = $db->query('select concat(d.nombre, " ", d.apaterno, " ", d.amaterno) as docente, c.nombre as carrera, dc.id as id from usuarios as d join docentes_carreras as dc on dc.docente = d.id join carreras as c on dc.carrera = c.id where carrera =' . $carrera)->getResultArray();
+        $docentesxc = $db->query('select 
+                concat(d.nombre, " ", d.apaterno, " ", d.amaterno) as docente, 
+                c.nombre as carrera, dc.id as id 
+            from usuarios as d join docentes_carreras as dc on dc.docente = d.id join carreras as c on dc.carrera = c.id where dc.carrera =' . $carrera)->getResultArray();
         // $data['docentes'] = $this->docenteModel->where('carrera_id', $carreraId)->findAll();
 
         $data = [
@@ -140,6 +154,7 @@ class CarreraController extends ResourceController
 
         // Puedes cargar una vista específica para mostrar los docentes adscritos
         return view('admin/carreras/docentes_adscritos', $data);
+
     }
 
 
@@ -254,6 +269,7 @@ class CarreraController extends ResourceController
     {
         $this->docentesCarrerasModel->delete($docente_carrera_id);
 
+        $carreraId = $this->request->getPost('carrera_id');
         return redirect()->to('admin/carreras');
     }
 

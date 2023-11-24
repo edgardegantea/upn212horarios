@@ -9,7 +9,8 @@
     <h2>Usuarios registrados en el sistema</h2>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-5">
         <a class="btn btn-primary me-md-2 mr-1" href="<?= site_url('admin/'); ?>">Regresar</a>
-        <a class="btn btn-primary" href="<?= site_url('admin/usuarios/new'); ?>">Nuevo</a>    
+        <a class="btn btn-primary" href="<?= site_url('admin/usuarios/new'); ?>">Nuevo usuario</a>
+        <a class="btn btn-primary ml-1" href="<?= site_url('admin/usuarios/crearCoordinador'); ?>">Registrar COORDINADOR</a>
     </div>
 
     <table id="example" class="display" style="width:100%">

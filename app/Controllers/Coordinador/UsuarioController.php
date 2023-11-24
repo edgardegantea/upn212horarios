@@ -4,23 +4,25 @@ namespace App\Controllers\Coordinador;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\UsuarioModel;
+use App\Models\DocentesCarrerasModel;
 
 class UsuarioController extends ResourceController
 {
     private $usuario;
+    private $docentesCarreras;
 
     public function __construct()
     {
         helper(['form', 'url', 'session']);
         $this->session = \Config\Services::session();
         $this->usuario = new UsuarioModel();
-    }
+        $this->docentesCarreras = new DocentesCarrerasModel();    }
 
     
 
     public function index()
     {
-        $usuarios = $this->usuario->orderBy('id', 'desc')->findAll(50);
+        $usuarios = $this->usuario->join()->orderBy('id', 'desc')->findAll(50);
 
         $data = [
             'usuarios'  => $usuarios
@@ -129,7 +131,19 @@ class UsuarioController extends ResourceController
 
     public function usuariosDocentes()
     {
-        $usuariosDocentes = $this->usuario->where('rol', 'docente')->orderBy('id', 'asc')->findAll();
+        // $usuariosDocentes = $this->usuario->where('rol', 'docente')->orderBy('id', 'asc')->findAll();
+        $this->session = \Config\Services::session();
+
+        $db = \Config\Database::connect();
+        $usuariosDocentes = $db->query('select
+                u.id, concat(u.nombre, " ", u.apaterno, " ", u.amaterno) as profesor, 
+                u.rol, u.username, u.email, u.sexo, u.email, u.sexo 
+            from
+                usuarios as u 
+            join docentes_carreras as dc on dc.docente = u.id
+            join carreras as c on dc.carrera = c.id
+            join usuarios as coordinadores on c.coordinador = coordinadores.id
+            where coordinadores.id ='.$this->session->id)->getResultArray();
 
         $data = [
             'usuariosDocentes'  => $usuariosDocentes
@@ -173,5 +187,28 @@ class UsuarioController extends ResourceController
 
         return redirect()->to('/coordinador/usuarios')->with('success', 'Contraseña actualizada exitosamente.');
     }
+
+
+
+
+
+    public function index2()
+    {
+        $this->session = \Config\Services::session();
+
+        // $db = \Config\Database::connect();
+        // $docentes = $db->query('select * from docentes_carreras where carrera =', $this->session->get('carrera'))->getResultArray();
+
+
+        // $docentes = $this->docentesCarreras->where('carrera', $this->session->get('carrera'))->findAll();
+        $docentes = $this->docentesCarreras->select('usuarios.nombre', 'carreras.nombre')
+            ->join('carreras', 'docentes_carreras.carrera = carreras.id')
+            ->join('usuarios', 'carreras.id = usuarios.carrera', 'left')
+            ->findAll();
+
+        dd($docentes);
+
+    }
+
 
 }

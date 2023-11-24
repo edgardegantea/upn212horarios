@@ -85,6 +85,9 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('usuarios/edit/(:num)', 'Admin\UsuarioController::edit/$1');
     $routes->post('usuarios/update/(:num)', 'Admin\UsuarioController::update/$1');
     $routes->get('usuarios/delete/(:num)', 'Admin\UsuarioController::delete/$1');
+    $routes->get('usuarios/crearCoordinador', 'Admin\UsuarioController::crearCoordinador');
+    $routes->post('usuarios/storeCoordinador', 'Admin\UsuarioController::storeCoordinador');
+
 
 
     $routes->get('programacion/getAsignaturas/(:num)', 'ProgramacionController::getAsignaturas/$1');
@@ -129,6 +132,36 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
 // Rutas para el coordinador
 $routes->group('coordinador', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'Coordinador\CoordinadorController::index');
+
+
+
+    $routes->get('programacion/getAsignaturas/(:num)', 'Coordinador\ProgramacionController::getAsignaturas/$1');
+    $routes->get('programacion/get_docentes_by_carrera/(:num)', 'Coordinador\ProgramacionController::getDocentesByCarrera/$1');
+    // $routes->get('programacion/get_docentes_by_carrera/(:num)', 'ProgramacionController::getDocentesByCarrera/$1');
+
+    $routes->post('programacion/asignaturasPorCarrera', 'Coordinador\ProgramacionController::asignaturasPorCarrera');
+    $routes->get('programacion/getAsignaturasByCarrera/(:num)', 'Coordinador\ProgramacionController::getAsignaturasByCarrera/$1');
+    $routes->get('programacion/getDocentesByCarrera/(:num)', 'Coordinador\ProgramacionController::getDocentesByCarrera/$1');
+
+    $routes->get('programacion/getAsignaturasPorCarrera/(:num)', 'Coordinador\ProgramacionController::getAsignaturasPorCarrera/$1');
+    $routes->get('programacion/obtenerAsignaturas', 'Coordinador\ProgramacionController::obtenerAsignaturas');
+
+    $routes->get('programacion/createxd', 'Coordinador\ProgramacionController::createxdocente');
+    $routes->post('programacion/storexd', 'Coordinador\ProgramacionController::storexdocente');
+
+    $routes->get('programacion/createtbl', 'Coordinador\ProgramacionController::create_table');
+
+    $routes->get('programacion', 'Coordinador\ProgramacionController::index');
+    $routes->get('programacion/create', 'Coordinador\ProgramacionController::create');
+    $routes->post('programacion/store', 'Coordinador\ProgramacionController::store');
+    $routes->get('programacion/edit/(:num)', 'Coordinador\ProgramacionController::edit/$1');
+    $routes->post('programacion/update/(:num)', 'Coordinador\ProgramacionController::update/$1');
+    $routes->get('programacion/delete/(:num)', 'Coordinador\ProgramacionController::delete/$1');
+
+
+
+
+    $routes->get('docentes/x', 'Coordinador\UsuarioController::index2');
 
 
     $routes->get('usuarios/edit_password/(:num)', 'Coordinador\UsuarioController::editPassword/$1'); // Mostrar formulario para editar la contraseña

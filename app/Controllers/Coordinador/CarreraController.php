@@ -20,12 +20,10 @@ class CarreraController extends ResourceController
 
     public function index()
     {
-        $carreras = $this->carreraModel->orderBy('nombre', 'asc')->findAll();
-        $carreraModel = new CarreraModel();
+        $carreras = $this->carreraModel->join('usuarios', 'carrera.coordinador = usuarios.id', 'left')->orderBy('nombre', 'asc')->findAll();
 
         $data = [
-            'carreras'  => $carreras,
-            'carreras'  => $carreraModel->orderBy('nombre', 'asc')->findAll()
+            'carreras'  => $carreras
         ];
 
         return view('coordinador/carreras/index', $data);

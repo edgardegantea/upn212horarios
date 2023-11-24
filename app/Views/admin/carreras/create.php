@@ -9,6 +9,17 @@
         <form class="mb-5" action="<?= base_url('admin/carreras'); ?>" method="post">
             <?= csrf_field(); ?>
 
+            <div class="row">
+                <div class="form-group">
+                    <label for="">Seleccione al coordinador:</label>
+                    <select name="coordinador" class="form-control" id="">
+                        <?php foreach ($coordinadores as $coordinador): ?>
+                            <option value="<?= $coordinador['id'] ?>"><?= $coordinador['nombre'] .' '. $coordinador['apaterno'] .' '. $coordinador['amaterno'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
             <div class="row mb-3">
                 <div class="col">
                     <div class="form-group">

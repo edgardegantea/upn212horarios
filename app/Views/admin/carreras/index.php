@@ -19,6 +19,7 @@
 
     <table id="example" class="table table-striped table-justify">
         <thead>
+            <th>COORDINADOR</th>
             <th>CARRERAS</th>
             <th>TIPO</th>
             <th>DOCENTES</th>
@@ -29,6 +30,7 @@
 
             <?php foreach($carreras as $carrera): ?>
                 <tr>
+                    <td><?= $carrera['coord'] ?></td>
                     <td><?= $carrera['nombre']; ?></td>
                     <td><?= $carrera['tipo']; ?></td>
                     <td>
@@ -55,6 +57,7 @@
 
         </tbody>
         <tfoot>
+            <th>COORDINADOR</th>
             <th>CARRERAS</th>
             <th>TIPO</th>
             <th>DOCENTES</th>

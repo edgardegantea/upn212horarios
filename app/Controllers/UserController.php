@@ -70,7 +70,7 @@ class UserController extends BaseController
             'email'         => $user['email'],
             'isLoggedIn'    => true,
             'rol'           => $user['rol'],
-            'sexo'          => $user['sexo']
+            'sexo'          => $user['sexo'],
         ];
 
         session()->set($data);
