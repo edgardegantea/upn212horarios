@@ -41,13 +41,21 @@ class ProgramacionController extends BaseController
         // $data['programacion'] = $model->findAll();
 
         $db = \Config\Database::connect();
-        $programacionHorarios = $db->query('select p.*, concat(a.clave, " ", a.nombre) as asignatura, concat(u.nombre, " ", u.apaterno, " ", u.amaterno) as docente, c.nombre as carrera from programacion as p left join asignaturas as a on p.materia_id = a.id left join usuarios as u on p.docente_id = u.id left join carreras as c on p.carrera_id = c.id')->getResultArray();
+        // $programacionHorarios = $db->query('select p.*, concat(a.clave, " ", a.nombre) as asignatura, concat(u.nombre, " ", u.apaterno, " ", u.amaterno) as docente, c.nombre as carrera from programacion as p left join asignaturas as a on p.materia_id = a.id left join usuarios as u on p.docente_id = u.id join carreras as c on p.carrera_id = c.id')->getResultArray();
+        $nombreAsignatura = $db->query('select ac.id, a.nombre as nombreasignatura from asignaturas as a left join asignaturas_carreras as ac on a.id = ac.asignatura')->getResultArray();
+        $programacionHorarios = $db->query("select p.*, a.nombre as asignatura, u.nombre as profesor from programacion p left join usuarios as u on p.docente_id = u.id left join asignaturas as a on p.materia_id = a.id")->getResultArray();
+
+        $todo = $db->query('select p.*, ac.id as ida, a.id as aid, a.nombre as nombremateria from programacion as p join asignaturas_carreras as ac on ac.id = p.materia_id left join asignaturas as a on ac.asignatura = a.id')->getResultArray();
 
         $data = [
-            'programacion' => $programacionHorarios
+            'programacion' => $programacionHorarios,
+            'nombreAsignatura' => $nombreAsignatura,
+            'todo'  => $todo
         ];
 
-        return view('admin/programacion/index', $data);
+        dd($data);
+
+        // return view('admin/programacion/index', $data);
     }
 
 

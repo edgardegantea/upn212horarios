@@ -20,7 +20,7 @@
         <?php foreach ($programacion as $programa) : ?>
             <tr>
                 <td><?= $programa['id']; ?></td>
-                <td><?= $programa['asignatura']; ?></td>
+                <td><?= $programa['materia_id']; ?></td>
                 <td><span class="text-uppercase"><?= $programa['docente']; ?></span></td>
                 <td><?= $programa['carrera']; ?></td>
                 <td class="text-center">

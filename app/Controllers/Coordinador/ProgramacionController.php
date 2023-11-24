@@ -41,13 +41,15 @@ class ProgramacionController extends BaseController
         $this->session = \Config\Services::session();
 
         $db = \Config\Database::connect();
-        $programacionHorarios = $db->query('select 
+        /* $programacionHorarios = $db->query('select 
                 p.*, a.nombre as asignatura, u.nombre as profesor, c.nombre as carrera
             from programacion as p 
                 left join asignaturas a on p.materia_id = a.id
                     left join usuarios u on p.docente_id = u.id
                         left join carreras c on p.carrera_id = c.id
-                            where c.id =', )->getResultArray();
+                            where c.id =', )->getResultArray(); */
+
+        $programacionHorarios = $db->query('select * from programacion')->getResultArray();
 
         $data = [
             'programacion' => $programacionHorarios
